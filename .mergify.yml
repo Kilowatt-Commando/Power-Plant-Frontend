@@ -1,4 +1,13 @@
 pull_request_rules:
+  - name: Manual-Merge label when Auto-Reviewed
+    conditions:
+      - status-success=auto-review
+    actions:
+      label:
+        add:
+          - manual-merge
+      comment:
+        message: This Pull request has been auto-reviewed and is ready for manual merge.
   - name: Automatic merge
     description: Merge when PR passes all status checks and has been reviewed
     conditions:
@@ -11,6 +20,5 @@ pull_request_rules:
     actions:
       merge:
         method: merge
-        commit_message_template: >
+        commit_message_template: |
           Merge: {{ title.strip() }}
-          
