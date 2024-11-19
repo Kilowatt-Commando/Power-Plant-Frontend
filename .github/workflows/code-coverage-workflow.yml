@@ -7,7 +7,7 @@ permissions:
   statuses: write
 
 jobs:
-  run:
+  evaluate-code-coverage:
     runs-on: ubuntu-latest
     env:
       NEXT_AUTH_GITHUB_ID: ${{ secrets.NEXT_AUTH_GITHUB_ID }}

@@ -1,8 +1,7 @@
 name: Run Tests
 on: push
 jobs:
-  # Build Job
-  build:
+  run-all-tests:
     runs-on: ubuntu-latest
     env:
       NEXT_AUTH_GITHUB_ID: ${{ secrets.NEXT_AUTH_GITHUB_ID }}

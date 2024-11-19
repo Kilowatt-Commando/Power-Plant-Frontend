@@ -45,3 +45,15 @@ jobs:
 
       - name: Push the image
         run: docker push ghcr.io/${{ env.LOWER_REPO_NAME }}:latest
+
+      - name: Set lowercase package name as environment variable
+        run: echo "LOWER_PACKAGE_NAME=$(echo ${{ github.event.repository.name }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
+      - name: Delete old docker-image package versions
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: ${{ env.LOWER_PACKAGE_NAME }}
+          owner: 'kilowatt-commando'
+          package-type: 'container'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-versions-to-keep: 2

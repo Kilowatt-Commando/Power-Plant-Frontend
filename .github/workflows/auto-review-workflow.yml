@@ -3,7 +3,7 @@ name: Auto PR Review
 on: [pull_request]
 
 jobs:
-  test:
+  auto-review:
     runs-on: ubuntu-latest
 
     steps:
@@ -12,24 +12,3 @@ jobs:
       - uses: omio-labs/pr-reviewer-bot@v1
         with:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_AUTO_REVIEW }}
-
-      - name: Approve Pull request if only allowed files were changed
-        if: steps.pr_reviewer_bot.outcome == 'success'
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.ACCESS_TOKEN_AUTO_REVIEW }}
-          script: |
-            const pull_number = context.payload.pull_request.number;
-            const reviewResponse = await github.rest.pulls.createReview({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: pull_number,
-              event: 'APPROVE',
-              body: 'Automated-Approval: changes made in this PR do not require manual review => Approved'
-            });
-            console.log('Review Response:', reviewResponse);
-      - name: add manual-merge label
-        if: steps.pr_reviewer_bot.outcome == 'success'
-        uses: actions-ecosystem/action-add-labels@v1
-        with:
-          labels: manual-merge

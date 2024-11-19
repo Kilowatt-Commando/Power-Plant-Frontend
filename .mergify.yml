@@ -11,8 +11,9 @@ pull_request_rules:
   - name: Automatic merge
     description: Merge when PR passes all status checks and has been reviewed
     conditions:
-      - status-success=build
-      - status-success=run
+      - status-success=evaluate-code-coverage
+      - status-success=run-all-tests
+      - status-success=build-nextjs-application
       - approved-reviews-by>=1
       - check-success=codecov/patch
       - check-success=codecov/project
@@ -22,3 +23,5 @@ pull_request_rules:
         method: merge
         commit_message_template: |
           Merge: {{ title.strip() }}
+      comment:
+        message: This Pull request satisfies all status-checks and will be automatically merged soon.
