@@ -10,5 +10,10 @@ jobs:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
       - uses: omio-labs/pr-reviewer-bot@v1
+        id: pr-reviewer-bot
         with:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_AUTO_REVIEW }}
+
+      - name: Echo Pr-Reviwer-Bot Outcome
+        run: |
+          echo "Pr-Reviwer-Bot Outcome: ${{ steps.pr-reviewer-bot.outputs.result }}"
