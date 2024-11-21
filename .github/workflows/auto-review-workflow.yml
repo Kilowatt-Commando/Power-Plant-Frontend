@@ -16,4 +16,4 @@ jobs:
 
       - name: Echo Pr-Reviwer-Bot Outcome
         run: |
-          echo "Pr-Reviwer-Bot Outcome: ${{ steps.pr-reviewer-bot.outputs.* }}"
+          echo "Pr-Reviwer-Bot Outcome: ${{join(steps.pr-reviewer-bot.outputs.*, '\n')}}"
