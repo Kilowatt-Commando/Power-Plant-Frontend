@@ -2,12 +2,9 @@ import React from 'react'
 import useTableProps from '@/hooks/useTableProps'
 import TableColumns from '@/components/Shared/Table/TableColumns'
 import TableItems from '@/components/Shared/Table/TableItems'
-import { useAnimate } from 'framer-motion'
 
 export interface TableActionButtonProps<T> {
   item: T
-  animate: ReturnType<typeof useAnimate>[1]
-  scope: ReturnType<typeof useAnimate>[0]
 }
 
 export interface TableProps<T = object> {
