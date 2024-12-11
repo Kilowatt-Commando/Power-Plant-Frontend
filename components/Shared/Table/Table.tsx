@@ -14,6 +14,26 @@ export interface TableProps<T = object> {
   actionButtons?: (props: TableActionButtonProps<T>) => React.ReactNode
 }
 
+/**
+ * This component renders a table for a given set of items
+ * @param items
+
+ @example
+ <Table<AnyItem>
+   items={items}
+   filterDisplayedProperties={[ keys of an item that shall be displayed, if not supplied all keys will be displayed ]}
+   propertyClasses={
+     {
+       // ...key's of each item and the class you want to apply to it
+       name: 'text-blue-500',
+     }
+   }
+   actionButtons={
+     // Client Component that renders the action buttons for each item
+   }
+ </Table>
+ * @constructor
+ */
 export function Table<T = unknown>({ items, ...partialProvidedProps }: TableProps<T>) {
   const { ...props } = useTableProps({ items, ...partialProvidedProps })
 
