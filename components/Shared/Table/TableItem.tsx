@@ -20,7 +20,7 @@ export default function TableItem<T>({ item, filterDisplayedProperties, actionBu
       )}>
       {filterDisplayedProperties.map((property, index) => (
         <td key={index.toString()} className={twMerge('p-2', getClasses(property))}>
-          {item[property]}
+          {String(item[property])}
         </td>
       ))}
       <td className={twMerge('flex justify-center h-12 gap-4 p-1.5', ActionButtons ? '' : 'hidden')}>
