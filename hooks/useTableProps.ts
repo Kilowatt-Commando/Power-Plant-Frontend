@@ -7,7 +7,7 @@ export default function useTableProps<T = object>({ ...props }: TableProps<T>): 
     propertyClasses: {} as { [key in keyof Partial<T>]: string },
     actionButtons: () => null,
     ...props,
-    hasActionButtons: props.actionButtons ?? false,
+    hasActionButtons: props.hasActionButtons ?? false,
   }
 
   return defaultProps
