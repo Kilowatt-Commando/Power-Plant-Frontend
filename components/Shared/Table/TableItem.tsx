@@ -8,13 +8,18 @@ export interface TableItemProps<T = object> extends Required<Omit<TableProps<T>,
 }
 
 export default function TableItem<T>({ item, filterDisplayedProperties, actionButtons: ActionButtons, ...props }: TableItemProps<T>) {
+  const getClasses = (property: keyof T) => {
+    if (!props.propertyClasses) return ''
+    if (!props.propertyClasses[property]) return ''
+    return props.propertyClasses[property]
+  }
   return (
     <TableRowAnimationContextProvider
       className={twMerge(
         'h-12 transition-colors duration-200 dark:text-gray-300 border-neutral-400  dark:border-neutral-500 dark:hover:bg-neutral-700  shadow-md shadow-neutral-300 dark:shadow-neutral-900',
       )}>
       {filterDisplayedProperties.map((property, index) => (
-        <td key={index.toString()} className='p-2'>
+        <td key={index.toString()} className={twMerge('p-2', getClasses(property))}>
           {item[property]}
         </td>
       ))}
