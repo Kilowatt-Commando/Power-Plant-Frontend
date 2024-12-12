@@ -14,10 +14,10 @@ export default async function ManagePowerPlantsPage() {
         items={plants}
         filterDisplayedProperties={['id', 'name', 'capacity', 'metric2', 'metric3']}
         propertyClasses={{
-          name: 'text-blue-500',
-          capacity: 'hidden @md:table-cell text-yellow-500',
-          metric2: 'hidden @xl:table-cell text-red-500',
-          metric3: 'hidden @2xl:table-cell text-green-500',
+          name: '',
+          capacity: 'hidden @md:table-cell',
+          metric2: 'hidden @xl:table-cell',
+          metric3: 'hidden @2xl:table-cell',
         }}
         actionButtons={ManagePowerPlantActionButtons}
       />
