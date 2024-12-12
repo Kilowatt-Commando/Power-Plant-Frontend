@@ -11,6 +11,8 @@ export interface TableProps<T = object> {
   items: T[]
   filterDisplayedProperties?: (keyof T)[]
   propertyClasses?: { [key in keyof Partial<T>]: string }
+
+  hasActionButtons?: boolean
   actionButtons?: (props: TableActionButtonProps<T>) => React.ReactNode
 }
 

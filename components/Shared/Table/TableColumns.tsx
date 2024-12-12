@@ -19,7 +19,7 @@ export default function TableColumns<T>({ filterDisplayedProperties, propertyCla
           {String(property).substring(0, 1).toUpperCase() + String(property).substring(1)}
         </th>
       ))}
-      {props.actionButtons && <th className='p-2 text-center bg-gray-700 py-2 dark:bg-neutral-900/70 '>Actions</th>}
+      {props.hasActionButtons && <th className='p-2 text-center bg-gray-700 py-2 dark:bg-neutral-900/70'>Actions</th>}
     </tr>
   )
 }
