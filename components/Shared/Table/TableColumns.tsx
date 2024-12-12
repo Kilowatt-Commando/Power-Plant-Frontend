@@ -2,7 +2,7 @@ import { TableProps } from '@/components/Shared/Table/Table'
 import { twMerge } from 'tailwind-merge'
 import React from 'react'
 
-export type TableColumnsProps<T> = Required<Omit<TableProps, 'items'>>
+export type TableColumnsProps<T> = Required<Omit<TableProps<T>, 'items'>>
 
 export default function TableColumns<T>({ filterDisplayedProperties, propertyClasses, ...props }: TableColumnsProps<T>) {
   const getPropertyClasses = (property: keyof T) => {
@@ -15,7 +15,7 @@ export default function TableColumns<T>({ filterDisplayedProperties, propertyCla
   return (
     <tr className='h-12 space-x-24 text-gray-100 dark:text-gray-200 '>
       {filterDisplayedProperties?.map((property, index) => (
-        <th key={property} className={twMerge('p-2 bg-gray-700 py-2 dark:bg-neutral-900/70 ', index === -1 ? 'rounded-tl-xl' : '', getPropertyClasses(property))}>
+        <th key={String(property)} className={twMerge('p-2 bg-gray-700 py-2 dark:bg-neutral-900/70 ', index === -1 ? 'rounded-tl-xl' : '', getPropertyClasses(property))}>
           {String(property).substring(0, 1).toUpperCase() + String(property).substring(1)}
         </th>
       ))}
