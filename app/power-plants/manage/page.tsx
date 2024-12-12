@@ -12,9 +12,12 @@ export default async function ManagePowerPlantsPage() {
 
       <Table<PowerPlantProps>
         items={plants}
-        filterDisplayedProperties={['id', 'name', 'capacity']}
+        filterDisplayedProperties={['id', 'name', 'capacity', 'metric2', 'metric3']}
         propertyClasses={{
           name: 'text-blue-500',
+          capacity: 'hidden @md:table-cell text-yellow-500',
+          metric2: 'hidden @xl:table-cell text-red-500',
+          metric3: 'hidden @2xl:table-cell text-green-500',
         }}
         actionButtons={ManagePowerPlantActionButtons}
       />
