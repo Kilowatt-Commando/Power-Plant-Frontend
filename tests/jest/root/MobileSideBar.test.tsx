@@ -1,24 +1,24 @@
 import { act, render, renderHook, screen } from '@testing-library/react'
 import { describe, it } from '@jest/globals'
-import { SideBarConfiguration } from '@/config/SideBarConfig'
 import { wait } from '@testing-library/user-event/dist/utils'
 import MobileSideBar from '@/components/root/SideBar/variants/MobileSideBar'
 import { mockAnimationsApi } from 'jsdom-testing-mocks'
+import { SideBarConfigTest } from '@/tests/jest/root/SideBarConfig.test'
 
 mockAnimationsApi()
 
 describe('MobileSideBar', () => {
   it('has the correct title', async () => {
-    renderHook(() => render(MobileSideBar({ ...SideBarConfiguration })))
+    renderHook(() => render(MobileSideBar({ ...SideBarConfigTest })))
 
     const sidebarHeading = screen.getByRole('heading', { level: 3 })
 
     expect(sidebarHeading).toBeInTheDocument()
-    expect(sidebarHeading).toHaveTextContent(SideBarConfiguration.title)
+    expect(sidebarHeading).toHaveTextContent(SideBarConfigTest.title)
   })
 
   it('shows navigation items and containers (=item with subitems)', async () => {
-    renderHook(() => render(MobileSideBar({ ...SideBarConfiguration })))
+    renderHook(() => render(MobileSideBar({ ...SideBarConfigTest })))
 
     //? Open Dialog
     const openCloseButton = screen.getByRole('button', { name: 'Open sidebar' })
@@ -32,7 +32,7 @@ describe('MobileSideBar', () => {
     const items = screen.getAllByRole('listitem', {})
     const itemTitles = items.map((item) => item.getElementsByClassName('element-title')[0].textContent)
 
-    const expectedItems = SideBarConfiguration.items.reduce((acc, item) => (item.items ? acc.concat(item).concat(item.items) : acc.concat(item)), [])
+    const expectedItems = SideBarConfigTest.items.reduce((acc, item) => (item.items ? acc.concat(item).concat(item.items) : acc.concat(item)), [])
 
     expect(items).toHaveLength(expectedItems.length)
     expect(itemTitles).toEqual(expectedItems.map((item) => item.title))

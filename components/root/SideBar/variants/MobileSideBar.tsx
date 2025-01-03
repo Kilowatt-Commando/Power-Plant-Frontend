@@ -50,7 +50,7 @@ export default function MobileSideBar(props: SideBarProps) {
           </div>
 
           <Suspense fallback={LoadingProfileInformation()}>
-            <UserProfile profilePage='#' />
+            <UserProfile profilePage='/profile' />
           </Suspense>
         </div>
       </MobileSideBarDialog>

@@ -1,26 +1,26 @@
 import { act, render, screen } from '@testing-library/react'
 import { describe, it } from '@jest/globals'
-import { SideBarConfiguration } from '@/config/SideBarConfig'
 import DesktopSideBar from '@/components/root/SideBar/variants/DesktopSideBar'
 import { wait } from '@testing-library/user-event/dist/utils'
 import { mockAnimationsApi } from 'jsdom-testing-mocks'
 import SideBarProps from '@/typings/root/SideBarProps'
+import { SideBarConfigTest } from '@/tests/jest/root/SideBarConfig.test'
 
 mockAnimationsApi()
 
 describe('DesktopSideBar', () => {
   it('has the correct title', async () => {
-    const Component = await DesktopSideBar({ ...SideBarConfiguration })
+    const Component = await DesktopSideBar({ ...SideBarConfigTest })
     render(Component)
 
     const sidebarHeading = screen.getByRole('heading', { level: 3 })
 
     expect(sidebarHeading).toBeInTheDocument()
-    expect(sidebarHeading).toHaveTextContent(SideBarConfiguration.title)
+    expect(sidebarHeading).toHaveTextContent(SideBarConfigTest.title)
   })
 
   it('shows navigation items and containers (=item with subitems)', async () => {
-    const Component = await DesktopSideBar({ ...SideBarConfiguration })
+    const Component = await DesktopSideBar({ ...SideBarConfigTest })
     render(Component)
 
     const initialSidebarItems = screen.getAllByRole('listitem', {})
@@ -30,7 +30,7 @@ describe('DesktopSideBar', () => {
     const items = screen.getAllByRole('listitem', {})
     const itemTitles = items.map((item) => item.getElementsByClassName('element-title')[0].textContent)
 
-    const expectedItems = SideBarConfiguration.items.reduce((acc, item) => (item.items ? acc.concat(item).concat(item.items) : acc.concat(item)), [])
+    const expectedItems = SideBarConfigTest.items.reduce((acc, item) => (item.items ? acc.concat(item).concat(item.items) : acc.concat(item)), [])
 
     expect(items).toHaveLength(expectedItems.length)
     expect(itemTitles).toEqual(expectedItems.map((item) => item.title))
