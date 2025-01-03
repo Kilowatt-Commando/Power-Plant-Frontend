@@ -30,7 +30,7 @@ jobs:
 
       - name: Run semantice release
         run: |
-          npx semantic-release
+          npm run semantic-release
 
       - name: Print package.json version (before)
         run: |
