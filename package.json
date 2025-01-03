@@ -23,6 +23,7 @@
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^13.5.0",
     "cross-env": "^7.0.3",
+    "framer-motion": "^11.11.17",
     "jsdom-testing-mocks": "^1.13.1",
     "monocart-reporter": "^2.9.9",
     "next": "14.2.17",
