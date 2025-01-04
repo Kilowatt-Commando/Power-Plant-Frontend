@@ -23,7 +23,7 @@ jobs:
 
       - name: Get Latest Hash
         run: |
-            LATEST_HASH=$(git rev-parse HEAD)
+            LATEST_HASH=$(git rev-parse --short HEAD)
             echo "LATEST_HASH=$LATEST_HASH" >> $GITHUB_ENV
 
       - name: Create pull request
