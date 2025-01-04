@@ -5,7 +5,7 @@ import { FramerMotionAnimate } from '@/typings/root/FramerMotionAnimate'
 
 class GenericKeyframesTarget<T> {}
 
-interface AnimateWorkflowProps {
+export interface AnimateWorkflowProps {
   iteration: number
   scope: AnimationScope
   animate: FramerMotionAnimate
@@ -24,7 +24,7 @@ export async function animateWorkflow({ iteration, ...props }: AnimateWorkflowPr
     animate(`#${id}`, { opacity: 1 }, { duration: 0.75 })
   }
 
-  if (iteration > maxIterations) return
+  if (iteration >= maxIterations) return
 
   await wait(delay * 3 + 500 * iteration)
   Array.from(children).forEach((child) => animate(child, { opacity: 0 }, { duration: 0.6 }))
