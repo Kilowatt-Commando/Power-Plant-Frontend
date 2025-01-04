@@ -16,11 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get Latest Tag
-        id: get_version
-        run: |
-          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null) 
-          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+      - name: 'Get Previous tag'
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+
 
       - name: Get Latest Hash
         run: |
@@ -32,5 +31,5 @@ jobs:
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "canary"
-          pr_title: "Merge Changes into Main from Canary (${{ env.LATEST_TAG }}-${{ env.LATEST_HASH }})"
-          pr_draft: true
+          pr_title: "Merge Changes into Main from Canary (${{ steps.previoustag.outputs.tag }}-${{ env.LATEST_HASH }})"
+          pr_draft: false
