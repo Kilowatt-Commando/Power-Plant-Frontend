@@ -9,7 +9,7 @@ const createJestConfig = nextJest({
 // Add any custom config to be passed to Jest
 const config: Config = {
   verbose: true,
-  testMatch: ['<rootDir>/tests/jest/**/*.test.tsx'],
+  testMatch: ['<rootDir>/tests/jest/**/*.test.tsx', '<rootDir>/tests/jest/**/*.test.ts'],
   coverageProvider: 'v8',
   testEnvironment: 'jsdom',
   // Add more setup options before each test is run
