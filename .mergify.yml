@@ -7,8 +7,8 @@ pull_request_rules:
       comment:
         message: "@{{ author }} The base of the Pull request cannot be set to `main`. Please use `canary` instead."
 
-  - name: Automatic merge
-    description: Merge when PR passes all status checks and has been reviewed
+  - name: Automatically Merge Pull Requests into Canary
+    description: Merges a PR once all status-checks pass and once it has been reviewed by at least one person
     conditions:
       - status-success=evaluate-code-coverage
       - status-success=run-all-tests
@@ -18,13 +18,15 @@ pull_request_rules:
       - check-success=codecov/project
       - -label=manual-merge # do not auto merge when manual-merge label is present
       - -approved-reviews-by=Harvey-Reginald-Specter # require manual-merge when auto-approved
+      - base=canary
     actions:
+      comment:
+        message: This Pull request satisfies all status-checks and will be automatically merged soon.
       merge:
         method: merge
         commit_message_template: >
           Merge: {{ title.strip() }}
-      comment:
-        message: This Pull request satisfies all status-checks and will be automatically merged soon.
+      
 
   - name: Add 'Manual-Merge' label to PR when Auto-Reviewed
     conditions:
