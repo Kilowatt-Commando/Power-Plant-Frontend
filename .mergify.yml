@@ -81,12 +81,13 @@ pull_request_rules:
       - -approved-reviews-by=Harvey-Reginald-Specter
       - -author=Marty-Byrde
       - -review-requested=Marty-Byrde # has not been requested for review
+      - base=canary
     actions:
       request_reviews:
         users:
           - "Marty-Byrde"
       comment:
-        message: "Auto-Assigned Marty-Byrde as Reviewer to this Pull Request."
+        message: "Auto-Assigned Marty-Byrde as a Reviewer to this Pull Request."
 
   - name: Auto-Assign MrsicMarko as Reviewer when Status Checks Pass and MrsicMarko is not the Author
     conditions:
@@ -99,12 +100,13 @@ pull_request_rules:
       - -approved-reviews-by=Harvey-Reginald-Specter
       - -author=MrsicMarko
       - -review-requested=MrsicMarko # has not been requested for review
+      - base=canary
     actions:
       request_reviews:
         users:
           - "MrsicMarko"
       comment:
-        message: "Auto-Assigned MrsicMarko as Reviewer to this Pull Request."
+        message: "Auto-Assigned MrsicMarko as a Reviewer to this Pull Request."
 
   - name: Auto-Assign Pull request author to Pull request
     conditions:
