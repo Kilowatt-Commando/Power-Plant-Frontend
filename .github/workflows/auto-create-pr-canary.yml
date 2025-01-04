@@ -12,16 +12,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get Unique Version Descriptor
+      - name: Get Latest Tag
         id: get_version
         run: |
-          VERSION=$(git describe --tags --long --always) 
-          echo "VERSION=$VERSION" >> $GITHUB_ENV        
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null) 
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+
+      - name: Get Latest Hash
+        run: |
+            LATEST_HASH=$(git rev-parse HEAD)
+            echo "LATEST_HASH=$LATEST_HASH" >> $GITHUB_ENV
 
       - name: Create pull request
         id: open-pr
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "canary"
-          pr_title: "Merge Changes into Main from Canary (${{ env.VERSION }})"
+          pr_title: "Merge Changes into Main from Canary (${{ env.LATEST_TAG }}-${{ env.LATEST_HASH }})"
           pr_draft: true
