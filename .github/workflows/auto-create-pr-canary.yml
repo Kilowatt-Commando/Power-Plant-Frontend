@@ -30,6 +30,6 @@ jobs:
         id: open-pr
         uses: repo-sync/pull-request@v2
         with:
-          destination_branch: "canary"
+          destination_branch: "main"
           pr_title: "Merge Changes into Main from Canary (${{ steps.previoustag.outputs.tag }}-${{ env.LATEST_HASH }})"
           pr_draft: false
