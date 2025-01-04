@@ -1,0 +1,36 @@
+name: Automatically Create Pull Request for Canary Branch
+
+# run this workflow only on new feature branches, not when they're merged to main
+on:
+  push:
+    branches:
+      - canary
+
+jobs:
+  create-pull-request-for-canary:
+    runs-on: ubuntu-latest
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_SEMANTIC_VERSIONING }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get Latest Tag
+        id: get_version
+        run: |
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null) 
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+
+      - name: Get Latest Hash
+        run: |
+            LATEST_HASH=$(git rev-parse HEAD)
+            echo "LATEST_HASH=$LATEST_HASH" >> $GITHUB_ENV
+
+      - name: Create pull request
+        id: open-pr
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "canary"
+          pr_title: "Merge Changes into Main from Canary (${{ env.LATEST_TAG }}-${{ env.LATEST_HASH }})"
+          pr_draft: true
