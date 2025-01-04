@@ -8,6 +8,7 @@ pull_request_rules:
       - approved-reviews-by>=1
       - check-success=codecov/patch
       - check-success=codecov/project
+      - -label=manual-merge # do not auto merge when manual-merge label is present
       - -approved-reviews-by=Harvey-Reginald-Specter # require manual-merge when auto-approved
     actions:
       merge:
