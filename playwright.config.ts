@@ -44,7 +44,8 @@ export default defineConfig({
   // Test directory
   testDir: './tests/playwright',
   // If a test fails, retry it additional 2 times
-  retries: 2,
+  retries: 1,
+  workers: '50%',
   // Artifacts folder where screenshots, videos, and traces are stored.
   outputDir: 'tests/playwright-test-artifacts/',
 
@@ -76,7 +77,7 @@ export default defineConfig({
     // Use baseURL so to make navigations relative.
     // More information: https://playwright.dev/docs/api/class-testoptions#test-options-base-url
     baseURL,
-
+    headless: true,
     // Retry a test if its failing with enabled tracing. This allows you to analyze the DOM, console logs, network traffic etc.
     // More information: https://playwright.dev/docs/trace-viewer
     trace: 'retry-with-trace',
