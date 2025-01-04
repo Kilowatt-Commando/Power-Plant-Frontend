@@ -1,4 +1,12 @@
 pull_request_rules:
+  - name: Wrong Pull Request Base
+    conditions:
+      - base=main
+      - -head=canary
+    actions:
+      comment:
+        message: "@{{ author }} The base of the Pull request cannot be set to `main`. Please use `canary` instead."
+
   - name: Automatic merge
     description: Merge when PR passes all status checks and has been reviewed
     conditions:
