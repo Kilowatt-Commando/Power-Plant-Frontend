@@ -17,8 +17,8 @@ test('Root Page shows animation', async ({ page }) => {
 
   // Check that not all children are visible
   const areItemsHiddenInitially = await page.evaluate(
-    ([x, y]) => {
-      const grid = document.querySelector('body > div:nth-of-type(3) > div.grid')!
+    ({ ANIMATION_GRID_SELECTOR }) => {
+      const grid = document.querySelector(ANIMATION_GRID_SELECTOR)!
 
       const children = Array.from(grid.children)
       const opacities = children.map((child) => window.getComputedStyle(child).opacity)
@@ -26,34 +26,29 @@ test('Root Page shows animation', async ({ page }) => {
       console.log('Finished checking initial opacities')
       return opacities.some((opacity) => opacity !== '1')
     },
-    [7, 8],
+    { ANIMATION_GRID_SELECTOR },
   )
   expect(areItemsHiddenInitially).toBe(true)
 
   await page.waitForFunction(
-    async () => {
-      const grid = document.querySelector('body > div:nth-of-type(3) > div.grid')
+    async ({ ANIMATION_GRID_SELECTOR }) => {
+      const grid = document.querySelector(ANIMATION_GRID_SELECTOR)!
       console.log('Checking opacities...')
-      if (!grid) return false
 
       return await new Promise((resolve, reject) => {
         const interval = setInterval(() => {
           const children = Array.from(grid.children)
-          const opacities = children.map((child) => window.getComputedStyle(child).opacity).map((opacity) => Math.round(parseFloat(opacity)))
+          const opacities = children.map((child) => window.getComputedStyle(child).opacity).map((opacity) => parseFloat(opacity))
 
           if (opacities.every((opacity) => opacity === 1)) {
             console.log("Every child's opacity is 1")
             clearInterval(interval)
             resolve(true)
-          } else {
-            console.log(opacities)
           }
         }, 250)
       })
     },
-    {},
-    { timeout: 20000 }, // After 10 seconds, wait will time out
+    { ANIMATION_GRID_SELECTOR },
+    { timeout: 10000 }, // After 10 seconds, wait will time out
   )
-
-  await page.pause()
 })
