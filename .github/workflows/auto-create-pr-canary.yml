@@ -9,6 +9,10 @@ on:
 jobs:
   create-pull-request-for-canary:
     runs-on: ubuntu-latest
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_SEMANTIC_VERSIONING }}
+
     steps:
       - uses: actions/checkout@v3
 

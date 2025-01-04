@@ -10,6 +10,10 @@ on:
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_SEMANTIC_VERSIONING }}
+
     steps:
       - uses: actions/checkout@v3
 
@@ -18,6 +22,6 @@ jobs:
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "canary"
-          pr_title: "[TEMPLATE] Merge Changes into Canary"
+          pr_title: "Merge Changes into Canary"
           pr_template: ".github/PULL_REQUEST_TEMPLATE.md"
           pr_draft: true
