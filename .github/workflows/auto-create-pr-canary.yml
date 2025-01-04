@@ -32,4 +32,4 @@ jobs:
         with:
           destination_branch: "canary"
           pr_title: "Merge Changes into Main from Canary (${{ steps.previoustag.outputs.tag }}-${{ env.LATEST_HASH }})"
-          pr_draft: true
+          pr_draft: false
