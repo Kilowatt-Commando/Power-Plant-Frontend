@@ -4,7 +4,7 @@ import DesktopSideBar from '@/components/root/SideBar/variants/DesktopSideBar'
 import { wait } from '@testing-library/user-event/dist/utils'
 import { mockAnimationsApi } from 'jsdom-testing-mocks'
 import SideBarProps from '@/typings/root/SideBarProps'
-import { SideBarConfigTest } from '@/tests/jest/root/SideBarConfig.test'
+import { SideBarConfigTest } from '@/tests/jest/root/SideBarConfig'
 
 mockAnimationsApi()
 
