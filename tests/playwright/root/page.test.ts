@@ -31,24 +31,15 @@ test('Root Page shows animation', async ({ page }) => {
   expect(areItemsHiddenInitially).toBe(true)
 
   await page.waitForFunction(
-    async ({ ANIMATION_GRID_SELECTOR }) => {
+    ({ ANIMATION_GRID_SELECTOR }) => {
       const grid = document.querySelector(ANIMATION_GRID_SELECTOR)!
-      console.log('Checking opacities...')
 
-      return await new Promise((resolve, reject) => {
-        const interval = setInterval(() => {
-          const children = Array.from(grid.children)
-          const opacities = children.map((child) => window.getComputedStyle(child).opacity).map((opacity) => parseFloat(opacity))
+      const children = Array.from(grid.children)
+      const opacities = children.map((child) => window.getComputedStyle(child).opacity)
 
-          if (opacities.every((opacity) => opacity === 1)) {
-            console.log("Every child's opacity is 1")
-            clearInterval(interval)
-            resolve(true)
-          }
-        }, 250)
-      })
+      return opacities.every((opacity) => opacity === '1')
     },
     { ANIMATION_GRID_SELECTOR },
-    { timeout: 10000 }, // After 10 seconds, wait will time out
+    { polling: 250, timeout: 10000 }, // Checl every 250ms, timeout after 10 seconds
   )
 })
