@@ -2,7 +2,7 @@
   "approvalRules": [
     {
       "changedFiles": {
-        "allowed": [".github/*", "yarn.lock", ".pr-bot.json", ".mergify.yml", "codecov.yml", ".commitlintrc.json", ".husky/*", ".actrc"]
+        "allowed": [".github/*", "yarn.lock", ".pr-bot.json", ".mergify.yml", "codecov.yml", ".commitlintrc.json", ".husky/*", ".actrc", ".releaserc.json"]
       }
     }
   ]
