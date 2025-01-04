@@ -3,7 +3,7 @@ import { describe, it } from '@jest/globals'
 import { wait } from '@testing-library/user-event/dist/utils'
 import MobileSideBar from '@/components/root/SideBar/variants/MobileSideBar'
 import { mockAnimationsApi } from 'jsdom-testing-mocks'
-import { SideBarConfigTest } from '@/tests/jest/root/SideBarConfig.test'
+import { SideBarConfigTest } from '@/tests/jest/root/SideBarConfig'
 
 mockAnimationsApi()
 

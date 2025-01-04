@@ -7,7 +7,7 @@ import ControllerService from '@/public/images/Controller-Service.png'
 import { useAnimate } from 'framer-motion'
 import { useEffect } from 'react'
 import { animateWorkflow } from '@/lib/root/AnimateWorkflow'
-import { AnimateImageGroup } from '@/lib/root/AnimateImageGroup'
+import { AnimateImageGroup } from '@/components/root/PowerPlantAnimation/AnimateImageGroup'
 
 export default function AnimatedPowerPlant() {
   const [scope, animate] = useAnimate()
@@ -21,7 +21,7 @@ export default function AnimatedPowerPlant() {
       ref={scope}
       className='grid grid-cols-1 @[760px]:grid-cols-2 @[1800px]:grid-cols-4
                  max-w-[400px] @[760px]:max-w-[1000px] @[1800px]:max-w-[2000px]
-                 pt-12 @[1800px]:pt-[25vh] gap-[5vw] mx-auto
+                 pt-12 @[1800px]:pt-[25vh] gap-[5vw] mx-auto 
       '>
       <AnimateImageGroup step={1} id='backend' title='Simulation Service' image={PowerPlantImage} text='Generates Data' />
       <AnimateImageGroup step={2} id='db-controller' title={'DB Service'} image={DatabaseServiceImage} text='Stores the Data' imageDimensions={{ width: 170, height: 200 }} />
