@@ -1,0 +1,22 @@
+name: Automatically Create Pull Request for any Branch
+
+# run this workflow only on new feature branches, not when they're merged to main / canary
+on:
+  push:
+    branches-ignore:
+      - main
+      - canary
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create pull request
+        id: open-pr
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "canary"
+          pr_title: "[TEMPLATE] Merge Changes into Canary"
+          pr_draft: true
