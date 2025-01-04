@@ -1,0 +1,27 @@
+name: Automatically Create Pull Request for Canary Branch
+
+# run this workflow only on new feature branches, not when they're merged to main
+on:
+  push:
+    branches:
+      - canary
+
+jobs:
+  create-pull-request-for-canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get Unique Version Descriptor
+        id: get_version
+        run: |
+          VERSION=$(git describe --tags --long --always) 
+          echo "VERSION=$VERSION" >> $GITHUB_ENV        
+
+      - name: Create pull request
+        id: open-pr
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "canary"
+          pr_title: "Merge Changes into Main from Canary (${{ env.VERSION }})"
+          pr_draft: true
