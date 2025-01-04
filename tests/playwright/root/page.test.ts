@@ -18,7 +18,8 @@ test('Root Page shows animation', async ({ page }) => {
   // Check that not all children are visible
   const areItemsHiddenInitially = await page.evaluate(
     ({ ANIMATION_GRID_SELECTOR }) => {
-      const grid = document.querySelector(ANIMATION_GRID_SELECTOR)!
+      const grid = document.querySelector(ANIMATION_GRID_SELECTOR)
+      if (!grid) return false
 
       const children = Array.from(grid.children)
       const opacities = children.map((child) => window.getComputedStyle(child).opacity)
@@ -32,7 +33,8 @@ test('Root Page shows animation', async ({ page }) => {
 
   await page.waitForFunction(
     ({ ANIMATION_GRID_SELECTOR }) => {
-      const grid = document.querySelector(ANIMATION_GRID_SELECTOR)!
+      const grid = document.querySelector(ANIMATION_GRID_SELECTOR)
+      if (!grid) return false
 
       const children = Array.from(grid.children)
       const opacities = children.map((child) => window.getComputedStyle(child).opacity)
