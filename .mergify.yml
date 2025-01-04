@@ -116,9 +116,9 @@ pull_request_rules:
         add_users:
           - "{{ author }}"
 
-  - name: Automatic Update-Branch when Main is ahead
+  - name: Automatic Update-Branch when Canary is ahead
     conditions:
-      - base = main
+      - base = canary
       - "#commits-behind > 0"
     actions:
       update:
