@@ -26,6 +26,7 @@ export async function animateWorkflow({ iteration, ...props }: AnimateWorkflowPr
 
   if (iteration > maxIterations) return
 
+  await wait(delay * 3 + 500 * iteration)
   Array.from(children).forEach((child) => animate(child, { opacity: 0 }, { duration: 0.6 }))
 
   await animateWorkflow({ iteration: iteration + 1, ...props })
