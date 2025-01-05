@@ -41,7 +41,7 @@ pull_request_rules:
       comment:
         message: This Pull request satisfies all status-checks and will be automatically merged soon.
       merge:
-        method: rebase
+        method: merge
 
   - name: Notify about Missing Done Label
     description: A Pull Request that is to be merged into the main branch must be marked as done to be merged. Notify authors about missing label, when all checks pass.
