@@ -1,5 +1,28 @@
 import { expect, test } from '@/tests/playwright/root/fixtures'
 
+/**
+ * Checks if a given table-element has action buttons in the last table-cell
+ * @param page
+ * @param elementSelector The selector of the table-element
+ * @returns The number of action buttons in the last table-cell
+ * @internal
+ */
+async function hasActionButtons(page: any, elementSelector: string): Promise<number> {
+  return await page.evaluate(
+    ({ elementSelector }) => {
+      const element = document.querySelector(elementSelector)
+      if (!element) return false
+
+      const lastCell = element.querySelector('td:last-child')
+      if (!lastCell) return false
+
+      const buttons = Array.from(lastCell.querySelectorAll('button'))
+      return buttons.length
+    },
+    { elementSelector },
+  )
+}
+
 test('Power Plant Management Page - Animates PowerPlant Startup', async ({ page }) => {
   const TABLE_ELEMENT_SELECTOR = 'html > body > div:nth-of-type(3) > div > table > tbody > tr:nth-of-type(1)'
 
@@ -8,21 +31,8 @@ test('Power Plant Management Page - Animates PowerPlant Startup', async ({ page 
   expect(element).not.toBeNull()
   await expect(element).toBeVisible()
 
-  const hasActionButtons = await page.evaluate(
-    ({ FIRST_TABLE_ELEMENT_SELECTOR }) => {
-      const element = document.querySelector(FIRST_TABLE_ELEMENT_SELECTOR)
-      if (!element) return false
-
-      const lastCell = element.querySelector('td:last-child')
-      if (!lastCell) return false
-
-      const buttons = Array.from(lastCell.querySelectorAll('button'))
-      return buttons.length > 0
-    },
-    { FIRST_TABLE_ELEMENT_SELECTOR: TABLE_ELEMENT_SELECTOR },
-  )
-
-  expect(hasActionButtons, 'Expect Management Table Element to have Action-Buttons in the last table-cell').toBe(true)
+  const actionButons = await hasActionButtons(page, TABLE_ELEMENT_SELECTOR)
+  expect(actionButons, 'Expect Management Table Element to have Action-Buttons in the last table-cell').toBeGreaterThanOrEqual(1)
 
   const startButtonClicked = await page.evaluate(
     ({ FIRST_TABLE_ELEMENT_SELECTOR }) => {
