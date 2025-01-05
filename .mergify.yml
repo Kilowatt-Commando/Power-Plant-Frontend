@@ -108,9 +108,13 @@ pull_request_rules:
       comment:
         message: "Auto-Assigned MrsicMarko as a Reviewer to this Pull Request."
 
-  - name: Auto-Assign Pull request author to Pull request
+  - name: Auto-Assign Pull Marty-Byrde to his own Pull requests
+    description: Assigns Marty Byrde to any feature-branch PR where he is the PR-Author
     conditions:
-      - "#files > 1"
+      - "#commits > 0"
+      - author=Marty-Byrde
+      - -base=main
+      - -head=canary
     actions:
       assign:
         add_users:
@@ -123,6 +127,6 @@ pull_request_rules:
     actions:
       update:
       comment:
-        message: "@{{ author }} This Pull request has been automatically updated, because the main branch was ahead."
+        message: "@{{ author }} This Pull request has been automatically updated, because the canary branch was ahead."
 
 
