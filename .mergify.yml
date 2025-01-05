@@ -127,6 +127,6 @@ pull_request_rules:
     actions:
       update:
       comment:
-        message: "@{{ author }} This Pull request has been automatically updated, because the main branch was ahead."
+        message: "@{{ author }} This Pull request has been automatically updated, because the canary branch was ahead."
 
 
