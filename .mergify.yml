@@ -109,12 +109,12 @@ pull_request_rules:
         message: "Auto-Assigned MrsicMarko as a Reviewer to this Pull Request."
 
   - name: Auto-Assign Pull Marty-Byrde to his own Pull requests
-    description: Assigns Marty Byrde to any PR where he is the sole-author
+    description: Assigns Marty Byrde to any feature-branch PR where he is the PR-Author
     conditions:
       - "#commits > 0"
       - author=Marty-Byrde
-      - commits[*].author~=Marty-Byrde|mergify|Harvey-Regionald-Specter
-      - -commits[*].author~=MrsicMarko
+      - -base=main
+      - -head=canary
     actions:
       assign:
         add_users:
