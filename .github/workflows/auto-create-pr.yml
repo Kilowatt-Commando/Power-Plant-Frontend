@@ -1,6 +1,5 @@
-name: Automatically Create Pull Request for any Branch
+name: Automatically Create Pull Request for any Branch when Marty-Byrde pushes to it
 
-# run this workflow only on new feature branches, not when they're merged to main / canary
 on:
   push:
     branches-ignore:
@@ -8,7 +7,8 @@ on:
       - canary
 
 jobs:
-  create-pull-request:
+  auto-create-pull-request:
+    if: ${{ github.actor == 'Marty-Byrde' }}
     runs-on: ubuntu-latest
 
     env:
