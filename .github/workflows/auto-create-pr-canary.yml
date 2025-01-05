@@ -1,13 +1,12 @@
-name: Automatically Create Pull Request for Canary Branch
+name: Automatically Create Pull Request for Canary Branch (using Marty-Byrde PAT)
 
-# run this workflow only on new feature branches, not when they're merged to main
 on:
   push:
     branches:
       - canary
 
 jobs:
-  create-pull-request-for-canary:
+  auto-create-pull-request-for-canary:
     runs-on: ubuntu-latest
 
     env:
