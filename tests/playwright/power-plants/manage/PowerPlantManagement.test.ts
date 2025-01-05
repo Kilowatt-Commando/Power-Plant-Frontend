@@ -50,6 +50,29 @@ async function clickActionButton(page: any, elementSelector: string, buttonText:
   )
 }
 
+/**
+ * Waits for a given power plant management element to be animated
+ * @param page
+ * @param elementSelector The selector of the power plant management element to wait for
+ * @param timeout The timeout in milliseconds after which the function fails, default is 5000ms
+ */
+async function isManageElementAnimated(page: any, elementSelector: string, timeout = 5000) {
+  await page.waitForFunction(
+    ({ elementSelector }) => {
+      const element = document.querySelector(elementSelector)
+      if (!element) return false
+
+      console.log('Waiting for element to be animated...')
+
+      // Expect element to be animated => transform style to be not 'none'
+      const transform = window.getComputedStyle(element).transform
+      return transform !== 'none'
+    },
+    { elementSelector },
+    { polling: 250, timeout },
+  )
+}
+
 test('Power Plant Management Page - Animates PowerPlant Startup', async ({ page }) => {
   const TABLE_ELEMENT_SELECTOR = 'html > body > div:nth-of-type(3) > div > table > tbody > tr:nth-of-type(1)'
 
@@ -64,19 +87,5 @@ test('Power Plant Management Page - Animates PowerPlant Startup', async ({ page 
   const startButtonClicked = await clickActionButton(page, TABLE_ELEMENT_SELECTOR, 'Start')
   expect(startButtonClicked, 'Expect Start-Button to be clicked').toBe(true)
 
-  // Check if the element is animated
-  await page.waitForFunction(
-    ({ FIRST_TABLE_ELEMENT_SELECTOR }) => {
-      const element = document.querySelector(FIRST_TABLE_ELEMENT_SELECTOR)
-      if (!element) return false
-
-      console.log('Waiting for element to be animated...')
-
-      // Expect element to be animated => transform style to be not 'none'
-      const transform = window.getComputedStyle(element).transform
-      return transform !== 'none'
-    },
-    { FIRST_TABLE_ELEMENT_SELECTOR: TABLE_ELEMENT_SELECTOR },
-    { polling: 250, timeout: 5000 },
-  )
+  await isManageElementAnimated(page, TABLE_ELEMENT_SELECTOR)
 })
