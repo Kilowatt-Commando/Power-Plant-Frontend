@@ -89,3 +89,20 @@ test('Power Plant Management Page - Animates PowerPlant Startup', async ({ page 
 
   await isManageElementAnimated(page, TABLE_ELEMENT_SELECTOR)
 })
+
+test('Power Plant Management Page - Animates PowerPlant Shutdown', async ({ page }) => {
+  const TABLE_ELEMENT_SELECTOR = 'html > body > div:nth-of-type(3) > div > table > tbody > tr:nth-of-type(1)'
+
+  await page.goto('http://localhost:3000/power-plants/manage')
+  const element = page.locator(TABLE_ELEMENT_SELECTOR)
+  expect(element).not.toBeNull()
+  await expect(element).toBeVisible()
+
+  const actionButons = await hasActionButtons(page, TABLE_ELEMENT_SELECTOR)
+  expect(actionButons, 'Expect Management Table Element to have Action-Buttons in the last table-cell').toBeGreaterThanOrEqual(1)
+
+  const startButtonClicked = await clickActionButton(page, TABLE_ELEMENT_SELECTOR, 'Shutdown')
+  expect(startButtonClicked, 'Expect Shutdown-Button to be clicked').toBe(true)
+
+  await isManageElementAnimated(page, TABLE_ELEMENT_SELECTOR)
+})
