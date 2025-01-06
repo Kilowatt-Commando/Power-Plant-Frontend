@@ -6,13 +6,13 @@ import { twMerge } from 'tailwind-merge'
 import { MobileSideBarVisibilityBreakpoints } from '@/config/SideBarConfig'
 import { BoltIcon } from '@heroicons/react/24/outline'
 import SideBarProps from '@/typings/root/SideBarProps'
-import useHeroIcon from '@/hooks/useHeroIcon'
 import { Dialog, Transition } from '@headlessui/react'
 import { RenderSideBarItems } from '@/components/root/SideBar'
 import { LoadingProfileInformation } from '@/components/root/UserProfile/LoadingUserInformation'
 import UserProfile from '@/components/root/UserProfile/UserProfie'
 import ColorModeSwitcher from '@/components/root/ColorModeSwitcher'
 import MobileSideBarContextProvider, { useMobileSideBarContext } from '@/components/root/SideBar/variants/MobileSideBarContext'
+import OpenCloseButton from '@/components/root/SideBar/variants/MobileSideBar_OpenCloseButton'
 
 export default function MobileSideBar(props: SideBarProps) {
   return (
@@ -41,23 +41,6 @@ export default function MobileSideBar(props: SideBarProps) {
         </div>
       </MobileSideBarDialog>
     </MobileSideBarContextProvider>
-  )
-}
-
-/**
- * This component renders a button that opens or closes the mobile sidebar depending on its open-state.
- */
-function OpenCloseButton() {
-  const { isOpen, setIsOpen } = useMobileSideBarContext()
-  const screenReaderText = isOpen ? 'Close sidebar' : 'Open sidebar'
-  const ButtonIcon = useHeroIcon({ iconName: isOpen ? 'XMarkIcon' : 'Bars3Icon' })
-
-  return (
-    <button name='open-close-button' type='button' className='-m-2.5 p-2.5 text-gray-700 dark:text-gray-200' onClick={() => setIsOpen(!isOpen)}>
-      <span className='sr-only'>{screenReaderText}</span>
-
-      <ButtonIcon className='size-6' />
-    </button>
   )
 }
 
