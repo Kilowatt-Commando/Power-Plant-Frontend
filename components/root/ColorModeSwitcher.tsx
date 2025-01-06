@@ -7,12 +7,16 @@ import { Transition } from '@headlessui/react'
 import useHeroIcon from '@/hooks/useHeroIcon'
 import { twMerge } from 'tailwind-merge'
 
-export default function ColorModeSwitcher() {
-  const { mode, toggleMode } = ColorModeHandler()
+type ColorMode = 'light' | 'dark' | undefined
+
+export default function ColorModeSwitcher({ defaultValue }: { defaultValue: ColorMode } = { defaultValue: undefined }) {
+  const { mode, toggleMode } = ColorModeHandler(defaultValue)
   const Icon = useHeroIcon({ iconName: mode === 'light' ? 'SunIcon' : 'MoonIcon', type: 'solid' })
 
   return (
     <div className='hover:cursor-pointer' onClick={toggleMode}>
+      {/* Fills the space that is otherwise taken by the Switcher Icon, while no colormode is set  */}
+      <div className={twMerge('size-6', !!mode && 'hidden')} />
       <Transition show={mode === 'light'} enter='transition duration-300' enterFrom='rotate-45 opacity-50' enterTo='rotate-0 opacity-100' leave='hidden'>
         <Icon className={twMerge('size-6', mode === 'dark' && 'hidden')} />
       </Transition>
@@ -24,8 +28,8 @@ export default function ColorModeSwitcher() {
   )
 }
 
-function ColorModeHandler() {
-  const [mode, setMode] = useState<'light' | 'dark' | undefined>()
+function ColorModeHandler(defaultValue: ColorMode) {
+  const [mode, setMode] = useState<ColorMode>(defaultValue)
   const toggleMode = () => setMode(mode === 'light' ? 'dark' : 'light')
 
   useEffect(() => {
@@ -41,7 +45,7 @@ function ColorModeHandler() {
   }, [mode])
 
   useEffect(() => {
-    const userPreference: 'dark' | 'light' = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    const userPreference: NonNullable<ColorMode> = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 
     const cookies = parseCookies()
     const colorMode = cookies.colorMode
