@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-max-depth */
-'use client'
-
 import React, { Suspense } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { MobileSideBarVisibilityBreakpoints } from '@/config/SideBarConfig'

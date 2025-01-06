@@ -1,3 +1,4 @@
+'use client'
 import { useMobileSideBarContext } from '@/components/root/SideBar/variants/MobileSideBarContext'
 import useHeroIcon from '@/hooks/useHeroIcon'
 
