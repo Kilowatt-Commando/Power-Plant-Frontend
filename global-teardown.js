@@ -13,6 +13,12 @@ const globalTeardown = async (config) => {
     port: 9230,
   })
 
+  if (!client) {
+    const stack = new Error('Coverage Collection Failed').stack
+    console.error('Collecting Coverage information failed. Please check if the application is already running.\n', stack)
+    return
+  }
+
   const dir = await client.writeCoverage()
   await client.close()
 
