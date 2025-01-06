@@ -4,7 +4,7 @@ import ManagePowerPlantActionButtons from '@/app/power-plants/manage/ManagePower
 import { PowerPlant } from '@/schemas/PowerPlant'
 
 export default async function ManagePowerPlantsPage() {
-  const plants = await fetch('http://localhost:3000/api/power-plants?count=20', { cache: 'no-store' }).then((res) => res.json() as Promise<PowerPlant[]>)
+  const plants = await fetch(`${process.env.DATA_API}/power-plants?count=20`, { cache: 'no-store' }).then((res) => res.json() as Promise<PowerPlant[]>)
 
   return (
     <div>

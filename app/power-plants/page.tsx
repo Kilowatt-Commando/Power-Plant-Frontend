@@ -2,7 +2,7 @@ import React from 'react'
 import PowerPlantPreview from '@/components/power-plants/PowerPlantPreview'
 
 export default async function PowerPlantsPage() {
-  const plants = await fetch('http://localhost:3000/api/power-plants?count=10', { cache: 'no-cache' }).then((res) => res.json() as Promise<PowerPlant[]>)
+  const plants = await fetch(`${process.env.DATA_API}/power-plants?count=10`, { cache: 'no-cache' }).then((res) => res.json() as Promise<PowerPlant[]>)
 
   return (
     <div className='@container'>
