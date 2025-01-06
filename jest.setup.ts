@@ -21,3 +21,9 @@ jest.mock('./components/root/ColorModeSwitcher', () => ({
   __esModule: true, // Indicates that the module uses ES modules
   default: jest.fn(), // Mock the default export as a Jest mock function
 }))
+
+//? Mocking the getColorMode function because the `cookies` property is not available in the jest test environment.
+jest.mock('@/lib/getColorMode', () => ({
+  __esModule: true, // Indicates that the module uses ES modules
+  default: jest.fn(), // Mock the default export as a Jest mock function
+}))

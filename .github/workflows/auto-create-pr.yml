@@ -1,0 +1,27 @@
+name: Automatically Create Pull Request for any Branch when Marty-Byrde pushes to it
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - canary
+
+jobs:
+  auto-create-pull-request:
+    if: ${{ github.actor == 'Marty-Byrde' }}
+    runs-on: ubuntu-latest
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN_SEMANTIC_VERSIONING }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create pull request
+        id: open-pr
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "canary"
+          pr_title: "Merge Changes into Canary"
+          pr_template: ".github/PULL_REQUEST_TEMPLATE.md"
+          pr_draft: true

@@ -1,7 +1,7 @@
 {
   "extends": ["@commitlint/config-conventional"],
   "rules": {
-    "type-enum": [2, "always", ["ci", "chore", "docs", "ticket", "feat", "fix", "perf", "refactor", "ref", "revert", "style", "tests"]],
+    "type-enum": [2, "always", ["ci", "chore", "docs", "ticket", "feat", "fix", "perf", "refactor", "ref", "revert", "style", "test", "tests"]],
     "body-max-line-length": [1, "always", 100]
   }
 }

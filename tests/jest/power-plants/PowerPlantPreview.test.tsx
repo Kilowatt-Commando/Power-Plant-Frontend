@@ -1,7 +1,7 @@
 import { describe, it } from '@jest/globals'
 import { render } from '@testing-library/react'
 import PowerPlantPreview from '@/components/power-plants/PowerPlantPreview'
-import { createDummyPowerPlants } from '@/typings/Shared/PowerPlant'
+import { createDummyPowerPlants } from '@/schemas/PowerPlant'
 
 const dummyPowerPlants = createDummyPowerPlants(5)
 
