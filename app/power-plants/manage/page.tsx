@@ -1,7 +1,7 @@
-import PowerPlantProps, { createDummyPowerPlants } from '@/typings/Shared/PowerPlant'
 import React from 'react'
 import { Table } from '@/components/Shared/Table/Table'
 import ManagePowerPlantActionButtons from '@/app/power-plants/manage/ManagePowerPlantActionButtons'
+import { createDummyPowerPlants, PowerPlant } from '@/schemas/PowerPlant'
 
 export default async function ManagePowerPlantsPage() {
   const plants = createDummyPowerPlants(20)
@@ -10,14 +10,14 @@ export default async function ManagePowerPlantsPage() {
     <div>
       <h1 className='text-2xl font-semibold mb-8 mt-2 tracking-wide'>Manage Power Plants</h1>
 
-      <Table<PowerPlantProps>
+      <Table<PowerPlant>
         items={plants}
-        filterDisplayedProperties={['id', 'name', 'capacity', 'metric2', 'metric3']}
+        filterDisplayedProperties={['id', 'name', 'waterThroughput', 'rpm', 'outputVoltage']}
         propertyClasses={{
           name: '',
-          capacity: 'hidden @md:table-cell',
-          metric2: 'hidden @xl:table-cell',
-          metric3: 'hidden @2xl:table-cell',
+          waterThroughput: 'hidden @md:table-cell',
+          rpm: 'hidden @xl:table-cell',
+          outputVoltage: 'hidden @2xl:table-cell',
         }}
         actionButtons={ManagePowerPlantActionButtons}
       />

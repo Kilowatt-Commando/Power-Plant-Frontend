@@ -1,6 +1,6 @@
 import React from 'react'
 import PowerPlantPreview from '@/components/power-plants/PowerPlantPreview'
-import { createDummyPowerPlants } from '@/typings/Shared/PowerPlant'
+import { createDummyPowerPlants } from '@/schemas/PowerPlant'
 
 export default async function PowerPlantsPage() {
   const plants = createDummyPowerPlants(Math.random() * 10 + 5)
