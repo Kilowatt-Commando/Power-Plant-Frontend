@@ -26,7 +26,7 @@ const getRandomValue = (min = 0, max = 100) => {
 export function createDummyPowerPlants(amount: number): PowerPlant[] {
   return Array.from({ length: amount }).map(() => ({
     id: getRandomValue(),
-    name: 'Dummy Power Plant',
+    name: `Dummy Power Plant ${getRandomValue()}`,
     waterThroughput: getRandomValue(),
     rpm: getRandomValue(0, 1000),
     outputVoltage: getRandomValue(100, 230),
