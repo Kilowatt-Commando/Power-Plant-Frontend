@@ -14,7 +14,7 @@ export default function ManagePowerPlantActionButtons<T>(props: TableActionButto
 
   const animateStart = async () => {
     await animate(scope.current, { background: 'rgba(131,246,54,0.26)', overflow: 'none' }, { duration: 0.1 })
-    await animate(scope.current, { x: 50, y: 0, opacity: 0.75 }, { duration: 0.5 })
+    await animate(scope.current, { x: 25, y: 0, opacity: 0.75 }, { duration: 0.5 })
     await animate(scope.current, { opacity: 1, x: 0, background: '' }, { duration: 0.25 })
   }
 
