@@ -40,7 +40,7 @@ export function Table<T = unknown>({ items, ...partialProvidedProps }: TableProp
   const { ...props } = useTableProps({ items, ...partialProvidedProps })
 
   return (
-    <table className='w-full rounded-md'>
+    <table className='w-full rounded-md overflow-hidden'>
       <thead className='text-left border dark:border-neutral-900 border-gray-700 rounded-xl '>
         <TableColumns {...props} />
       </thead>
