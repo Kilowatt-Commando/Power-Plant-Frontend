@@ -15,6 +15,8 @@ export default function ColorModeSwitcher({ defaultValue }: { defaultValue: Colo
 
   return (
     <div className='hover:cursor-pointer' onClick={toggleMode}>
+      {/* Fills the space that is otherwise taken by the Switcher Icon, while no colormode is set  */}
+      <div className={twMerge('size-6', !!mode && 'hidden')} />
       <Transition show={mode === 'light'} enter='transition duration-300' enterFrom='rotate-45 opacity-50' enterTo='rotate-0 opacity-100' leave='hidden'>
         <Icon className={twMerge('size-6', mode === 'dark' && 'hidden')} />
       </Transition>
