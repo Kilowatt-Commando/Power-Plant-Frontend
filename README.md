@@ -11,6 +11,8 @@ This project uses the following secrets that need to be set in the `.env` file:
 - `NEXTAUTH_SECRET`: A secret (string) used to encrypt the session token
 - `NEXT_AUTH_GITHUB_ID`: The client ID of the GitHub OAuth application used for authentication
 - `NEXT_AUTH_GITHUB_SECRET`: The client secret of the GitHub OAuth application used for authentication
+- `DATA_API`: The base URL of the data API, e.g. `https://api.example.com` that provides the frontend with real-world data. When no data API is available, you can use the dummy data API endpoint by setting `DATA_API` to `http://localhost:3000/api`. 
+- `CONTROL_API`: The base URL of the control API, e.g. `https://api-control.example.com` to which commands like "shutdown", "start" are send. When no control API is available, you can use the dummy control API endpoint by setting `CONTROL_API` to `http://localhost:3000/api`. 
 
 ## Getting Started
 

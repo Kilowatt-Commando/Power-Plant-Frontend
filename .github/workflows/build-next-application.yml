@@ -10,6 +10,8 @@ jobs:
       NEXT_AUTH_GITHUB_SECRET: ${{ secrets.NEXT_AUTH_GITHUB_SECRET }}
       NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
       NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+      DATA_API: ${{ secrets.DATA_API }}
+      CONTROL_API: ${{ secrets.CONTROL_API }}
 
     steps:
       - name: Checkout

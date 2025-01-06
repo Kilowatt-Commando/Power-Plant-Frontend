@@ -8,16 +8,16 @@ import RpmSvg from '@/icons/RpmSvg'
 import WaterLevelSvg from '@/icons/WaterLevelSvg'
 import React from 'react'
 import IconProps from '@/typings/icons/IconProps'
-import PowerPlantProps from '@/typings/Shared/PowerPlant'
+import { PowerPlant } from '@/schemas/PowerPlant'
 
-export interface PowerPlantPreviewProps extends PowerPlantProps {
+export interface PowerPlantPreviewProps extends PowerPlant {
   previewHref?: string
 }
 
 /**
  * This component renders a preview of a power plant that shows its name and id and three of the most important metrics. When clicked it navigates to the power plant's detail page.
  */
-export default function PowerPlantPreview({ id, name, capacity, metric3, metric2, previewHref }: PowerPlantPreviewProps) {
+export default function PowerPlantPreview({ id, name, rpm, waterThroughput, outputVoltage, previewHref }: PowerPlantPreviewProps) {
   return (
     <Link
       href={previewHref ?? `/power-plants/${id}`}
@@ -29,13 +29,13 @@ export default function PowerPlantPreview({ id, name, capacity, metric3, metric2
       </div>
       <PowerPlantPreviewIcon className='size-20' />
       <div className='flex justify-evenly mb-2'>
-        <MetricColorization value={capacity}>
+        <MetricColorization value={outputVoltage} thresholdWarning={200} thresholdCritical={150}>
           <TemperatureSvg className='size-7 dark:fill-neutral-200 fill-neutral-600' />
         </MetricColorization>
-        <MetricColorization value={metric2}>
+        <MetricColorization value={rpm} thresholdWarning={500} thresholdCritical={250}>
           <RpmSvg className='size-7 dark:fill-neutral-300 fill-neutral-600' />
         </MetricColorization>
-        <MetricColorization value={metric3}>
+        <MetricColorization value={waterThroughput} thresholdWarning={50} thresholdCritical={25}>
           <WaterLevelSvg className='size-7 dark:fill-neutral-300 fill-neutral-600' />
         </MetricColorization>
       </div>
