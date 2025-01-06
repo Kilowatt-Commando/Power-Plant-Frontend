@@ -49,7 +49,7 @@ test('Root Page shows animation', async ({ page }) => {
 test.use({ colorScheme: 'dark' })
 test('Check that Color Mode can be switched', async ({ page }) => {
   await page.goto('http://localhost:3000/')
-  const colorModeSwitcher = page.locator('#sidebar-header div')
+  const colorModeSwitcher = page.locator('#sidebar-header > div')
   await expect(colorModeSwitcher).toBeVisible()
 
   const html = page.locator('html')
