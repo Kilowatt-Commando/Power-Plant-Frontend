@@ -10,14 +10,17 @@ import ColorModeSwitcher from '@/components/root/ColorModeSwitcher'
 import MobileSideBarContextProvider from '@/components/root/SideBar/variants/MobileSideBarContext'
 import OpenCloseButton from '@/components/root/SideBar/variants/MobileSideBar_OpenCloseButton'
 import MobileSideBarDialog from '@/components/root/SideBar/variants/MobileSideBarDialog'
+import getColorMode from '@/lib/getColorMode'
 
 export default function MobileSideBar(props: SideBarProps) {
+  const colorMode = getColorMode()
+
   return (
     <MobileSideBarContextProvider>
       <div id='mobile-sidebar-top-bar' className={twMerge('bg-gray-50 dark:bg-neutral-900 p-4 border-b-2 justify-between', MobileSideBarVisibilityBreakpoints)}>
         <OpenCloseButton />
         <h3 className='flex-1 text-center text-lg font-semibold leading-6 text-gray-700 dark:text-gray-200'>{props.title}</h3>
-        <ColorModeSwitcher />
+        <ColorModeSwitcher defaultValue={colorMode} />
       </div>
 
       <MobileSideBarDialog>
