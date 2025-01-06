@@ -1,9 +1,8 @@
 import React from 'react'
 import PowerPlantPreview from '@/components/power-plants/PowerPlantPreview'
-import { createDummyPowerPlants } from '@/schemas/PowerPlant'
 
 export default async function PowerPlantsPage() {
-  const plants = createDummyPowerPlants(Math.random() * 10 + 5)
+  const plants = await fetch('http://localhost:3000/api/power-plants?count=10', { cache: 'no-cache' }).then((res) => res.json() as Promise<PowerPlant[]>)
 
   return (
     <div className='@container'>

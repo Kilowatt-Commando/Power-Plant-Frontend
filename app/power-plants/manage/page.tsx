@@ -1,10 +1,10 @@
 import React from 'react'
 import { Table } from '@/components/Shared/Table/Table'
 import ManagePowerPlantActionButtons from '@/app/power-plants/manage/ManagePowerPlantActionButtons'
-import { createDummyPowerPlants, PowerPlant } from '@/schemas/PowerPlant'
+import { PowerPlant } from '@/schemas/PowerPlant'
 
 export default async function ManagePowerPlantsPage() {
-  const plants = createDummyPowerPlants(20)
+  const plants = await fetch('http://localhost:3000/api/power-plants?count=20', { cache: 'no-store' }).then((res) => res.json() as Promise<PowerPlant[]>)
 
   return (
     <div>
