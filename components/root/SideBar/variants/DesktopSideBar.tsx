@@ -8,8 +8,8 @@ import UserProfile from '@/components/root/UserProfile/UserProfie'
 import ColorModeSwitcher from '@/components/root/ColorModeSwitcher'
 import getColorMode from '@/lib/getColorMode'
 
-export default async function DesktopSideBar(props: SideBarProps) {
-  const colorMode = await getColorMode()
+export default function DesktopSideBar(props: SideBarProps) {
+  const colorMode = getColorMode()
 
   return (
     <div id='desktop-sidebar-container' className={twMerge('fixed dark:bg-neutral-900/50 bg-gray-200 h-full flex-col p-3 pl-2', DesktopSideBarVisibilityBreakpoints)}>
