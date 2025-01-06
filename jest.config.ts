@@ -12,6 +12,7 @@ const config: Config = {
   testMatch: ['<rootDir>/tests/jest/**/*.test.tsx', '<rootDir>/tests/jest/**/*.test.ts'],
   coverageProvider: 'v8',
   testEnvironment: 'jsdom',
+  maxWorkers: '50%',
   // Add more setup options before each test is run
   setupFilesAfterEnv: ['./jest.setup.ts'],
   moduleNameMapper: {
