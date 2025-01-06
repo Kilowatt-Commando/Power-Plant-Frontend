@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-max-depth */
 'use client'
 
-import React, { createContext, Fragment, Suspense, useContext, useState } from 'react'
+import React, { Fragment, Suspense } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { MobileSideBarVisibilityBreakpoints } from '@/config/SideBarConfig'
 import { BoltIcon } from '@heroicons/react/24/outline'
@@ -12,25 +12,11 @@ import { RenderSideBarItems } from '@/components/root/SideBar'
 import { LoadingProfileInformation } from '@/components/root/UserProfile/LoadingUserInformation'
 import UserProfile from '@/components/root/UserProfile/UserProfie'
 import ColorModeSwitcher from '@/components/root/ColorModeSwitcher'
-
-interface MobileSideBarContextProps {
-  isOpen: boolean
-  setIsOpen: (value: boolean) => void
-}
-
-const MobileSideBarContext = createContext<MobileSideBarContextProps>({} as MobileSideBarContextProps)
-
-function useMobileSideBarContext() {
-  const context = useContext(MobileSideBarContext)
-
-  return context
-}
+import MobileSideBarContextProvider, { useMobileSideBarContext } from '@/components/root/SideBar/variants/MobileSideBarContext'
 
 export default function MobileSideBar(props: SideBarProps) {
-  const [isOpen, setIsOpen] = useState(false)
-
   return (
-    <MobileSideBarContext.Provider value={{ isOpen, setIsOpen }}>
+    <MobileSideBarContextProvider>
       <div id='mobile-sidebar-top-bar' className={twMerge('bg-gray-50 dark:bg-neutral-900 p-4 border-b-2 justify-between', MobileSideBarVisibilityBreakpoints)}>
         <OpenCloseButton />
         <h3 className='flex-1 text-center text-lg font-semibold leading-6 text-gray-700 dark:text-gray-200'>{props.title}</h3>
@@ -54,7 +40,7 @@ export default function MobileSideBar(props: SideBarProps) {
           </Suspense>
         </div>
       </MobileSideBarDialog>
-    </MobileSideBarContext.Provider>
+    </MobileSideBarContextProvider>
   )
 }
 
