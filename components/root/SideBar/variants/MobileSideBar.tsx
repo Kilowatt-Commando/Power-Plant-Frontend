@@ -24,7 +24,7 @@ export default function MobileSideBar(props: SideBarProps) {
       </div>
 
       <MobileSideBarDialog>
-        <div className='flex grow flex-col gap-y-5 overflow-y-auto bg-white pb-2 dark:bg-neutral-800 overflow-x-hidden'>
+        <div className='flex grow flex-col gap-y-5 overflow-y-auto bg-white pb-2 dark:bg-neutral-800 '>
           <div className='flex shrink-0 items-center justify-between border-b-2 pl-4 py-4 border-solid px-2 border-gray-400 dark:border-gray-200 dark:bg-neutral-900'>
             <BoltIcon className='size-6' />
             <span className='text-lg flex-1 mx-auto pr-4 text-center font-semibold leading-6 text-gray-700 dark:text-gray-200'>Navigation</span>
