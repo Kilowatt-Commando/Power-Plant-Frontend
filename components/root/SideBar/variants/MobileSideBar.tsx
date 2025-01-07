@@ -31,7 +31,7 @@ export default function MobileSideBar(props: SideBarProps) {
             <OpenCloseButton />
           </div>
 
-          <div className='h-full dark:text-gray-300/90 text-gray-600 pr-4 pl-2'>
+          <div className='h-full dark:text-gray-300/90 text-gray-600 px-2'>
             <RenderSideBarItems items={props.items} />
           </div>
 
