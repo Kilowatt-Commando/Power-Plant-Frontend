@@ -12,12 +12,12 @@ export default async function ManagePowerPlantsPage() {
 
       <Table<PowerPlant>
         items={plants}
-        filterDisplayedProperties={['id', 'name', 'waterThroughput', 'rpm', 'outputVoltage']}
+        filterDisplayedProperties={['id', 'name', 'rpm', 'waterThroughput', 'outputVoltage']}
         propertyClasses={{
           name: '',
-          waterThroughput: 'hidden @md:table-cell',
-          rpm: 'hidden @xl:table-cell',
-          outputVoltage: 'hidden @2xl:table-cell',
+          waterThroughput: 'hidden @[610px]:table-cell',
+          rpm: 'hidden @[510px]:table-cell',
+          outputVoltage: 'hidden @[770px]:table-cell',
         }}
         actionButtons={ManagePowerPlantActionButtons}
       />
