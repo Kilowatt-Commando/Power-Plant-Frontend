@@ -46,16 +46,23 @@ jobs:
         run: |
           echo "The latest non-prerelease tag is: ${{ steps.latest_release_tag.outputs.tag }}"
 
-
-      - name: Get Latest Hash
+      - name: Get latest commit hash on main
+        id: commit_main
         run: |
-            LATEST_HASH=$(git rev-parse --short HEAD)
-            echo "LATEST_HASH=$LATEST_HASH" >> $GITHUB_ENV
+          # Make sure we have the latest info for 'main' from origin
+          git fetch origin main
+          COMMIT_HASH=$(git rev-parse --short origin/main)
+          echo "commit_hash=$COMMIT_HASH" >> $GITHUB_OUTPUT
+
+      - name: Display results
+        run: |
+          echo "Latest release tag (ignoring pre-releases): ${{ steps.latest_release_tag.outputs.tag }}"
+          echo "Latest commit hash on main:               ${{ steps.commit_main.outputs.commit_hash }}"
 
       - name: Create pull request
         id: open-pr
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "main"
-          pr_title: "Merge Changes into Main from Canary (${{ steps.latest_release_tag.outputs.tag }}-${{ env.LATEST_HASH }})"
+          pr_title: "Merge Changes into Main from Canary (${{ steps.latest_release_tag.outputs.tag }}-${{ steps.commit_main.outputs.commit_hash }})"
           pr_draft: false
