@@ -132,6 +132,7 @@ pull_request_rules:
   - name: Automatic Update-Branch when Main is ahead
     conditions:
       - base = main
+      - head=canary
       - "#commits-behind > 0"
     actions:
       update:
