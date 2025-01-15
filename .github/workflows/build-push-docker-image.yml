@@ -12,6 +12,8 @@ permissions:
 jobs:
   build-and-push-docker-image:
     runs-on: ubuntu-latest
+    needs: semantic-versioning
+
     env:
       REPO_NAME: ${{ github.repository }}
       NEXT_AUTH_GITHUB_ID: ${{ secrets.NEXT_AUTH_GITHUB_ID }}
@@ -24,6 +26,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
@@ -41,6 +45,12 @@ jobs:
           echo "NEXT_AUTH_GITHUB_SECRET=${{ env.NEXT_AUTH_GITHUB_SECRET }}" >> .env
           echo "NEXTAUTH_URL=${{ env.NEXTAUTH_URL }}" >> .env
           echo "NEXTAUTH_SECRET=${{ env.NEXTAUTH_SECRET }}" >> .env
+          echo "DATA_API=${{ env.DATA_API }}" >> .env
+          echo "CONTROL_API=${{ env.CONTROL_API }}" >> .env
+
+      - name: 'Get Previous tag'
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
 
       - name: Build the Docker image
         run: docker build -t ghcr.io/${{ env.LOWER_REPO_NAME }}:latest .
@@ -48,14 +58,9 @@ jobs:
       - name: Push the image
         run: docker push ghcr.io/${{ env.LOWER_REPO_NAME }}:latest
 
-      - name: Set lowercase package name as environment variable
-        run: echo "LOWER_PACKAGE_NAME=$(echo ${{ github.event.repository.name }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+      - name: Tag Image based on current tag
+        run: docker tag ghcr.io/${{ env.LOWER_REPO_NAME }}:latest ghcr.io/${{ env.LOWER_REPO_NAME }}:${{ steps.previoustag.outputs.tag }}
 
-      - name: Delete old docker-image package versions
-        uses: actions/delete-package-versions@v5
-        with:
-          package-name: ${{ env.LOWER_PACKAGE_NAME }}
-          owner: 'kilowatt-commando'
-          package-type: 'container'
-          token: ${{ secrets.GITHUB_TOKEN }}
-          min-versions-to-keep: 2
+      - name: Push the tagged image
+        run: docker push ghcr.io/${{ env.LOWER_REPO_NAME }}:${{ steps.previoustag.outputs.tag }}
+        continue-on-error: true
