@@ -42,11 +42,18 @@ jobs:
           echo "NEXTAUTH_URL=${{ env.NEXTAUTH_URL }}" >> .env
           echo "NEXTAUTH_SECRET=${{ env.NEXTAUTH_SECRET }}" >> .env
 
+      - name: 'Get Previous tag'
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+
       - name: Build the Docker image
         run: docker build -t ghcr.io/${{ env.LOWER_REPO_NAME }}:latest .
 
       - name: Push the image
         run: docker push ghcr.io/${{ env.LOWER_REPO_NAME }}:latest
 
-      - name: Set lowercase package name as environment variable
-        run: echo "LOWER_PACKAGE_NAME=$(echo ${{ github.event.repository.name }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+      - name: Tag Image based on current tag
+        run: docker tag ghcr.io/${{ env.LOWER_REPO_NAME }}:latest ghcr.io/${{ env.LOWER_REPO_NAME }}:${{ steps.previoustag.outputs.tag }}
+
+      - name: Push the tagged image
+        run: docker push ghcr.io/${{ env.LOWER_REPO_NAME }}:${{ steps.previoustag.outputs.tag }}
