@@ -1,9 +1,8 @@
-name: Automatic Semantic Versioning
+name: Automatic Semantic Versioning for Canary Branch
 
 on:
   push:
     branches:
-      - main
       - canary
   workflow_dispatch:
 
