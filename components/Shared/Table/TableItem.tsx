@@ -23,8 +23,10 @@ export default function TableItem<T>({ item, filterDisplayedProperties, actionBu
           {String(item[property])}
         </td>
       ))}
-      <td className={twMerge('flex justify-center h-12 gap-4 p-1.5', !props.hasActionButtons ? 'hidden' : '')}>
-        <ActionButtons item={item} />
+      <td className={twMerge('', !props.hasActionButtons ? 'hidden' : '')}>
+        <div className='flex justify-center items-center gap-4 p-1.5'>
+          <ActionButtons item={item} />
+        </div>
       </td>
     </TableRowAnimationContextProvider>
   )

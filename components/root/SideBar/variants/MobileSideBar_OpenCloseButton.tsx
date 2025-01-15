@@ -24,7 +24,7 @@ export default function MobileSideBar_OpenCloseButton() {
   }, [pathname])
 
   return (
-    <button name='open-close-button' type='button' className='-m-2.5 p-2.5 text-gray-700 dark:text-gray-200' onClick={() => setIsOpen(!isOpen)}>
+    <button name='open-close-button' type='button' className=' text-gray-700 dark:text-gray-200' onClick={() => setIsOpen(!isOpen)}>
       <span className='sr-only'>{screenReaderText}</span>
 
       <ButtonIcon className='size-6' />
