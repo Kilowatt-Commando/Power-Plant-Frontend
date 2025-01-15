@@ -12,6 +12,8 @@ permissions:
 jobs:
   build-and-push-docker-image:
     runs-on: ubuntu-latest
+    needs: semantic-versioning
+
     env:
       REPO_NAME: ${{ github.repository }}
       NEXT_AUTH_GITHUB_ID: ${{ secrets.NEXT_AUTH_GITHUB_ID }}
