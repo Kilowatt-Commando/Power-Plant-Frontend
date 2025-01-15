@@ -1,6 +1,10 @@
 name: Auto PR Review
 
-on: [pull_request]
+on:
+  push:
+    branches-ignore:
+      - main
+      - canary
 
 jobs:
   auto-review:
