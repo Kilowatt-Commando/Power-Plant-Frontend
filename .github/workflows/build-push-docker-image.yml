@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Semantic Versioning and Docker Image Build, Push on Main Branch
 
 on:
   push:
