@@ -59,3 +59,5 @@ jobs:
 
       - name: Push the tagged image
         run: docker push ghcr.io/${{ env.LOWER_REPO_NAME }}:${{ steps.previoustag.outputs.tag }}
+        continue-on-error: true
+        
