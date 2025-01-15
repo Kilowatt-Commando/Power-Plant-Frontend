@@ -43,6 +43,8 @@ jobs:
           echo "NEXT_AUTH_GITHUB_SECRET=${{ env.NEXT_AUTH_GITHUB_SECRET }}" >> .env
           echo "NEXTAUTH_URL=${{ env.NEXTAUTH_URL }}" >> .env
           echo "NEXTAUTH_SECRET=${{ env.NEXTAUTH_SECRET }}" >> .env
+          echo "DATA_API=${{ env.DATA_API }}" >> .env
+          echo "CONTROL_API=${{ env.CONTROL_API }}" >> .env
 
       - name: 'Get Previous tag'
         id: previoustag
@@ -60,4 +62,3 @@ jobs:
       - name: Push the tagged image
         run: docker push ghcr.io/${{ env.LOWER_REPO_NAME }}:${{ steps.previoustag.outputs.tag }}
         continue-on-error: true
-        
