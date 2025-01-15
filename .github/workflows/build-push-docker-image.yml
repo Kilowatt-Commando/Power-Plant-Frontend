@@ -9,13 +9,28 @@ permissions:
   contents: read
   packages: write
 
+env:
+  GH_TOKEN: ${{ secrets.ACCESS_TOKEN_SEMANTIC_VERSIONING }}
+
 jobs:
-  wait-for-semantic-versioning:
-    # This way we ensure that each workflow has at least one job without dependencies
+  semantic-versioning:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Just exit
-        run: echo "Doing nothing..."
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Node 21
+        uses: actions/setup-node@v3
+        with:
+          node-version: 21
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run semantice release
+        run: |
+          npm run semantic-release
 
   build-and-push-docker-image:
     runs-on: ubuntu-latest
