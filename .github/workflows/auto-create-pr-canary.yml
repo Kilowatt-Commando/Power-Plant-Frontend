@@ -65,4 +65,5 @@ jobs:
         with:
           destination_branch: "main"
           pr_title: "Merge Changes into Main from Canary (${{ steps.latest_release_tag.outputs.tag }}-${{ steps.commit_main.outputs.commit_hash }})"
+          pr_body: "This PR was automatically created by the Auto-Create-PR-Canary workflow to merge changes from the canary branch into main. These changes are based on ${{ steps.latest_release_tag.outputs.tag }} and the latest commit on main (${{ steps.commit_main.outputs.commit_hash }})."
           pr_draft: false
