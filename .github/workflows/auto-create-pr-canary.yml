@@ -14,10 +14,37 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - name: 'Get Previous tag'
-        id: previoustag
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+      - name: Fetch all tags
+        run: git fetch --tags --force
+
+      - name: Get latest non-prerelease tag
+        id: latest_release_tag
+        run: |
+          # 1. Get all tags starting with v, e.g., "v1.2.3", "v1.2.0-canary1"
+          # 2. Filter out those with a '-' (which typically indicates pre-release or metadata)
+          # 3. Sort them semver descending
+          # 4. Pick the first one
+          
+          TAGS=$(git tag --list "v*" | grep -v "-")
+          if [ -z "$TAGS" ]; then
+            echo "No non-prerelease tags found."
+            echo "tag=" >> $GITHUB_OUTPUT
+          else
+            # Sort tags in version order descending, then grab the first
+            LATEST_TAG=$(echo "$TAGS" | sort -V | tail -n1)
+          
+            echo "Found the following release tags:"
+            echo "$TAGS"
+            echo "Latest release tag is: $LATEST_TAG"
+            echo "tag=$LATEST_TAG" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Print the tag
+        run: |
+          echo "The latest non-prerelease tag is: ${{ steps.latest_release_tag.outputs.tag }}"
 
 
       - name: Get Latest Hash
@@ -30,5 +57,5 @@ jobs:
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "main"
-          pr_title: "Merge Changes into Main from Canary (${{ steps.previoustag.outputs.tag }}-${{ env.LATEST_HASH }})"
+          pr_title: "Merge Changes into Main from Canary (${{ steps.latest_release_tag.outputs.tag }}-${{ env.LATEST_HASH }})"
           pr_draft: false
