@@ -129,4 +129,13 @@ pull_request_rules:
       comment:
         message: "@{{ author }} This Pull request has been automatically updated, because the canary branch was ahead."
 
+  - name: Automatic Update-Branch when Main is ahead
+    conditions:
+      - base = main
+      - "#commits-behind > 0"
+    actions:
+      update:
+      comment:
+        message: "This Pull request has been automatically updated, because the main branch was ahead."
+
 
