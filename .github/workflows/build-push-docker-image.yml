@@ -10,6 +10,13 @@ permissions:
   packages: write
 
 jobs:
+  wait-for-semantic-versioning:
+    # This way we ensure that each workflow has at least one job without dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Just exit
+        run: echo "Doing nothing..."
+
   build-and-push-docker-image:
     runs-on: ubuntu-latest
     needs: semantic-versioning
