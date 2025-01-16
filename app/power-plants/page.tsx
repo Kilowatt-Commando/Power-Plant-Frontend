@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Available Power Plants',
+  description: 'List of currently available power plants',
 }
 
 export default async function PowerPlantsPage() {

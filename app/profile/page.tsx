@@ -5,7 +5,8 @@ import { ProfileSignOutView } from '@/components/profile/ProfileSignOutView'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Profile Settings',
+  title: 'Profile Overview',
+  description: 'Profile Overview of the user currently signed in',
 }
 
 export default async function ProfilePage() {
