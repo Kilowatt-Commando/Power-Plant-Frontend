@@ -1,6 +1,11 @@
 import React from 'react'
 import PowerPlantPreview from '@/components/power-plants/PowerPlantPreview'
 import { PowerPlant } from '@/schemas/PowerPlant'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Available Power Plants',
+}
 
 export default async function PowerPlantsPage() {
   const plants = await fetch(`${process.env.DATA_API}/power-plants?count=10`, { cache: 'no-cache' }).then((res) => res.json() as Promise<PowerPlant[]>)
