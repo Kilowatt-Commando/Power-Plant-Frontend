@@ -2,6 +2,12 @@ import React from 'react'
 import getSession from '@/lib/getSession'
 import { redirect } from 'next/navigation'
 import { ProfileSignOutView } from '@/components/profile/ProfileSignOutView'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Profile Overview',
+  description: 'Profile Overview of the user currently signed in',
+}
 
 export default async function ProfilePage() {
   const { user } = await getSession()
