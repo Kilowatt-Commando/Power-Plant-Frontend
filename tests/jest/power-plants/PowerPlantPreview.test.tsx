@@ -10,16 +10,18 @@ describe('PowerPlantPreview - ', () => {
     const href = '/test'
     const plant = dummyPowerPlants.at(0)
     const encodedPowerPlant = encodeURIComponent(
-      JSON.stringify({
-        id: plant.id,
-        name: plant.name,
-        status: plant.status,
-        rpm: plant.rpm,
-        outputVoltage: plant.outputVoltage,
-        waterThroughput: plant.waterThroughput,
-        nextWeather: plant.nextWeather,
-        timestamp: plant.timestamp,
-      }),
+      encodeURIComponent(
+        JSON.stringify({
+          id: plant.id,
+          name: plant.name,
+          status: plant.status,
+          rpm: plant.rpm,
+          outputVoltage: plant.outputVoltage,
+          waterThroughput: plant.waterThroughput,
+          nextWeather: plant.nextWeather,
+          timestamp: plant.timestamp,
+        }),
+      ),
     )
     const Component = await PowerPlantPreview({ ...plant, previewHref: href })
     const { container } = render(Component)
