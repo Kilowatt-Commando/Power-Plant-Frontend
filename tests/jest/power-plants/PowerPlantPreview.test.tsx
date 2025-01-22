@@ -8,21 +8,21 @@ const dummyPowerPlants = createDummyPowerPlants(5)
 describe('PowerPlantPreview - ', () => {
   it('has correct redirect link', async () => {
     const href = '/test'
-    const powerPlant = dummyPowerPlants.at(0)
+    const plant = dummyPowerPlants.at(0)
     const encodedPowerPlant = encodeURIComponent(
       JSON.stringify({
-        id: powerPlant.id,
-        name: powerPlant.name,
-        status: powerPlant.status,
-        rpm: powerPlant.rpm,
-        outputVoltage: powerPlant.outputVoltage,
-        waterThroughput: powerPlant.waterThroughput,
-        nextWeather: powerPlant.nextWeather,
-        timestamp: powerPlant.timestamp,
+        id: plant.id,
+        name: plant.name,
+        status: plant.status,
+        rpm: plant.rpm,
+        outputVoltage: plant.outputVoltage,
+        waterThroughput: plant.waterThroughput,
+        nextWeather: plant.nextWeather,
+        timestamp: plant.timestamp,
       }),
     )
-
-    const { container } = render(<PowerPlantPreview {...powerPlant} previewHref={href} />)
+    const Component = await PowerPlantPreview({ ...plant, previewHref: href })
+    const { container } = render(Component)
 
     const links = container.getElementsByTagName('a')
     expect(links.length).toBeGreaterThanOrEqual(1)
@@ -34,16 +34,16 @@ describe('PowerPlantPreview - ', () => {
   })
 
   it('displays correct power plant name and id', async () => {
-    const powerPlant = dummyPowerPlants.at(0)
-    const { container } = render(<PowerPlantPreview {...powerPlant} />)
+    const Component = await PowerPlantPreview({ ...dummyPowerPlants.at(0) })
+    const { container } = render(Component)
 
     const nameHeading = container.getElementsByTagName('h3')[0]
     const idSpan = container.getElementsByTagName('span')[0]
 
     expect(nameHeading).toBeInTheDocument()
-    expect(nameHeading.textContent).toBe(powerPlant.name)
+    expect(nameHeading.textContent).toBe(dummyPowerPlants.at(0).name)
 
     expect(idSpan).toBeInTheDocument()
-    expect(idSpan.textContent).toBe(`#${powerPlant.id}`)
+    expect(idSpan.textContent).toBe(`#${dummyPowerPlants.at(0).id}`)
   })
 })
