@@ -3,9 +3,12 @@ import { z } from 'zod'
 const PowerPlantSchema = z.object({
   id: z.number(),
   name: z.string(),
-  waterThroughput: z.number(),
+  status: z.string(),
   rpm: z.number(),
   outputVoltage: z.number(),
+  waterThroughput: z.number(),
+  nextWeather: z.string(),
+  timestamp: z.string(),
 })
 
 export type PowerPlant = z.infer<typeof PowerPlantSchema>
@@ -27,9 +30,12 @@ export function createDummyPowerPlants(amount: number): PowerPlant[] {
   return Array.from({ length: amount }).map(() => ({
     id: getRandomValue(),
     name: `Dummy Power Plant ${getRandomValue()}`,
-    waterThroughput: getRandomValue(),
+    status: 'NoStatus',
     rpm: getRandomValue(0, 1000),
     outputVoltage: getRandomValue(100, 230),
+    waterThroughput: getRandomValue(),
+    nextWeather: 'NoWeather',
+    timestamp: '00:00:00',
   }))
 }
 
