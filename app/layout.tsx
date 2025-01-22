@@ -6,6 +6,7 @@ import React from 'react'
 import getColorMode from '@/lib/getColorMode'
 import AuthProvider from '@/components/root/AuthProvider'
 
+
 export default function RootLayout({
   children,
 }: Readonly<{

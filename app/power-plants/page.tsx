@@ -3,6 +3,12 @@
 import React, { useEffect, useState } from 'react'
 import PowerPlantPreview from '@/components/power-plants/PowerPlantPreview'
 import { PowerPlant } from '@/schemas/PowerPlant'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Available Power Plants',
+  description: 'List of currently available power plants',
+}
 
 const PowerPlantsPage: React.FC = () => {
   const [plants, setPlants] = useState<PowerPlant[]>([])
