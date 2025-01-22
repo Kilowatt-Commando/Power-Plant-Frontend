@@ -1,11 +1,13 @@
+// 'use client'
+
 import type { Metadata } from 'next'
 import './globals.css'
 import SideBar from '@/components/root/SideBar'
 import { twMerge } from 'tailwind-merge'
 import { MainContentShiftBreakpoints } from '@/config/SideBarConfig'
 import React from 'react'
-import AuthProvider from '@/components/root/AuthProvider'
 import getColorMode from '@/lib/getColorMode'
+import { AuthProvider } from '@/components/root/AuthProvider'
 
 export const metadata: Metadata = {
   title: 'Create Next App',

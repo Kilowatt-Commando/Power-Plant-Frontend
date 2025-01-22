@@ -19,6 +19,11 @@ export const SideBarConfiguration: SideBarProps = {
       href: '/power-plants/manage',
       iconName: 'WrenchScrewdriverIcon',
     },
+    {
+      title: 'Login',
+      href: '/login',
+      iconName: 'UserIcon',
+    },
   ],
 }
 

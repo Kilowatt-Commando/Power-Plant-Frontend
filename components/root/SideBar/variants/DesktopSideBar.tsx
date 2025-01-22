@@ -7,9 +7,11 @@ import { LoadingProfileInformation } from '@/components/root/UserProfile/Loading
 import UserProfile from '@/components/root/UserProfile/UserProfie'
 import ColorModeSwitcher from '@/components/root/ColorModeSwitcher'
 import getColorMode from '@/lib/getColorMode'
+// import { useAuth } from '../../AuthProvider'
 
 export default function DesktopSideBar(props: SideBarProps) {
   const colorMode = getColorMode()
+  // const { logout } = useAuth()
 
   return (
     <div id='desktop-sidebar-container' className={twMerge('fixed dark:bg-neutral-900/50 bg-gray-200 h-full flex-col p-3 pl-2', DesktopSideBarVisibilityBreakpoints)}>
@@ -21,10 +23,10 @@ export default function DesktopSideBar(props: SideBarProps) {
       <div className='h-full dark:text-gray-300/90 text-gray-600 py-4'>
         <RenderSideBarItems items={props.items} />
       </div>
-
-      <Suspense fallback={LoadingProfileInformation()}>
+      {/* <button onClick={logout}>Logout</button> */}
+      {/* <Suspense fallback={LoadingProfileInformation()}>
         <UserProfile profilePage='/profile' />
-      </Suspense>
+      </Suspense> */}
     </div>
   )
 }
