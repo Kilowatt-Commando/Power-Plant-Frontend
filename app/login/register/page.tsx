@@ -2,13 +2,9 @@
 
 import Link from 'next/link'
 import '../login.css'
-import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
-//PETER MUSS @CrossOrigin
-
 const RegisterPage: React.FC = () => {
-  const router = useRouter()
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -23,28 +19,12 @@ const RegisterPage: React.FC = () => {
       return
     }
     try {
-      //${process.env.USER_API}/register
-      // const plants = await fetch(`${path}/register`, {
-      //   method: 'POST',
-      //   cache: 'no-cache',
-      //   mode: 'no-cors',
-      //   body: JSON.stringify({ username: username, password: password, email: email }),
-      //   headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
-      // }).then((res) => console.log(res))
-      // console.log(plants)
       const response = await fetch(`${path}/register`, {
         method: 'POST',
-        // cache: 'no-cache',
-        // mode: 'no-cors',
         body: JSON.stringify({ username: username, password: password, email: email }),
         headers: { 'Content-Type': 'application/json' },
       })
-      // console.log(response)
       if (response.ok) {
-        // console.log('Joooooooooooooooo')
-        // const data = await response.text()
-
-        // router.push('/login')
         alert('Registrierung erfolgreich!')
       } else {
         const errorData = await response.json()
@@ -54,9 +34,6 @@ const RegisterPage: React.FC = () => {
       console.error('Fehler beim Registrieren:', error)
       alert('Ein Fehler ist aufgetreten')
     }
-    // Füge deine Registrierung-Logik hier hinzu
-    // console.log('Registering user', { username, email, password })
-    // router.push('/login')
   }
 
   return (

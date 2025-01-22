@@ -3,8 +3,6 @@
 import { AnimationScope } from 'framer-motion'
 import { FramerMotionAnimate } from '@/typings/root/FramerMotionAnimate'
 
-class GenericKeyframesTarget<T> {}
-
 export interface AnimateWorkflowProps {
   iteration: number
   scope: AnimationScope

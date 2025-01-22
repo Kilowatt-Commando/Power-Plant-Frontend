@@ -3,15 +3,9 @@
 import Link from 'next/link'
 import './login.css'
 import React, { useState } from 'react'
-// import { useAuth } from '@/components/root/AuthProvider'
 import { useRouter } from 'next/navigation'
 
-// npm isntall jsonwebtoken
-// npm install --save-dev @types/jsonwebtoken
-
 const LoginPage: React.FC = () => {
-  const router = useRouter()
-  // const { login } = useAuth()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const path = 'http://188.245.157.176:9090/api/auth'

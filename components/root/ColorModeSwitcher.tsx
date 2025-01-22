@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { parseCookies, setCookie } from 'nookies'
-import { MoonIcon } from '@heroicons/react/24/outline'
 import { Transition } from '@headlessui/react'
 import useHeroIcon from '@/hooks/useHeroIcon'
 import { twMerge } from 'tailwind-merge'
