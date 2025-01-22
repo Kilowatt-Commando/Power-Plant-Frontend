@@ -16,14 +16,15 @@ export default async function ManagePowerPlantsPage() {
 
       <Table<PowerPlant>
         items={plants}
-        filterDisplayedProperties={['id', 'name', 'rpm', 'waterThroughput', 'outputVoltage']}
+        filterDisplayedProperties={['id', 'name', 'rpm', 'waterThroughput', 'outputVoltage', 'status']}
         propertyClasses={{
           name: '',
+          status: '',
           waterThroughput: 'hidden @[610px]:table-cell',
           rpm: 'hidden @[510px]:table-cell',
           outputVoltage: 'hidden @[770px]:table-cell',
         }}
-        actionButtons={ManagePowerPlantActionButtons}
+        actionButtons={(plant) => <ManagePowerPlantActionButtons item={plant.item.name} />}
       />
     </div>
   )
