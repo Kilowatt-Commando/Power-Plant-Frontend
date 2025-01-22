@@ -2,7 +2,11 @@ import React from 'react'
 import { Table } from '@/components/Shared/Table/Table'
 import ManagePowerPlantActionButtons from '@/app/power-plants/manage/ManagePowerPlantActionButtons'
 import { PowerPlant } from '@/schemas/PowerPlant'
+import { Metadata } from 'next'
 
+export const metadata: Metadata = {
+  title: 'Manage Power Plants',
+}
 export default async function ManagePowerPlantsPage() {
   const plants = await fetch(`${process.env.DATA_API}/powerplants/latest`, { cache: 'no-store' }).then((res) => res.json() as Promise<PowerPlant[]>)
 
