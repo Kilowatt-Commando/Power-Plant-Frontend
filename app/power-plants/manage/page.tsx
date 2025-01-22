@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Manage Power Plants',
 }
 export default async function ManagePowerPlantsPage() {
-  const plants = await fetch(`${process.env.DATA_API}/power-plants?count=20`, { cache: 'no-store' }).then((res) => res.json() as Promise<PowerPlant[]>)
+  const plants = await fetch(`${process.env.DATA_API}/powerplants/latest`, { cache: 'no-store' }).then((res) => res.json() as Promise<PowerPlant[]>)
 
   return (
     <div>
