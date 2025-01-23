@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 export default function DetailsActionButtons() {
   const { manageWaterflow, base_endpoint, powerPlant, toggleManageWaterflow } = usePowerPlantDetailContext()
-  console.log(powerPlant)
+
   const updatePowerPlant = async (action: 'start' | 'stop') => {
     return await fetch(`${base_endpoint}/${powerPlant.name}/${action}`, {
       method: 'PUT',
