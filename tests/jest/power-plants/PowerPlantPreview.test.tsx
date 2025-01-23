@@ -19,7 +19,7 @@ describe('PowerPlantPreview - ', () => {
     const link = links[0]
 
     expect(link).toBeInTheDocument()
-    expect(link).toHaveAttribute('href', `${defaultHrefBase}/${plant.id}`)
+    expect(link).toHaveAttribute('href', `${defaultHrefBase}/${plant.name}`)
   })
 
   it('displays correct power plant name and id', async () => {
