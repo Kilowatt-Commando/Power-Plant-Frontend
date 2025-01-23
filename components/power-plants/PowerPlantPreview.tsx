@@ -24,7 +24,7 @@ export default function PowerPlantPreview({ id, name, status, rpm, outputVoltage
       role='listitem'
       className='p-4 dark:bg-neutral-700/50 bg-neutral-200 shadow-neutral-400 dark:shadow-neutral-900 shadow-md rounded-md flex flex-col gap-8 hover:bg-neutral-400/40 dark:hover:bg-neutral-700 hover:cursor-pointer'>
       <div className='flex justify-between items-center '>
-        <h3 className='text-lg font-semibold capitalize'>{name}</h3>
+        <h3 className='text-lg font-semibold'>{name}</h3>
         <span className='w-12 text-center tabular-nums p-2 rounded-md rounded-bl-[40%] bg-blue-300/30 dark:bg-blue-600/30'>#{id}</span>
       </div>
       <PowerPlantPreviewIcon className='size-20' />
