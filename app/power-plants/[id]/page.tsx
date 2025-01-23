@@ -17,7 +17,7 @@ export default async function PowerPlantDetailPage({ searchParams: { powerplant_
   return (
     <PowerPlantDetailProvider powerPlant={powerPlant} base_endpoint={`${process.env.DATA_API}/powerplant`}>
       <div className='flex justify-center items-center p-6'>
-        <div className='border border-gray-300 rounded-lg p-6 bg-white max-w-[600px] w-full shadow-md'>
+        <div className='border border-gray-300 dark:border-neutral-500 rounded-lg p-6 bg-white dark:bg-neutral-700 dark:shadow-neutral-800 max-w-[600px] w-full shadow-md'>
           <h1 className='text-2xl font-bold mb-6 text-center'>{powerPlant.name}</h1>
           <table className='table-auto border-collapse w-full mb-6'>
             <tbody>
