@@ -2,29 +2,36 @@
 
 import { TableActionButtonProps } from '@/components/Shared/Table/Table'
 import { useTableRowAnimationContext } from '@/components/Shared/Table/TableRowAnimationContextProvider'
+import { useEnvironmentVariables } from '@/components/power-plants/manage/EnvironmentVariablesProvider'
+import { toast } from 'react-toastify'
 
 export default function ManagePowerPlantActionButtons<T>(props: TableActionButtonProps<T>) {
   const { scope, animate } = useTableRowAnimationContext()
+  const { CONTROL_API } = useEnvironmentVariables()
+
+  const updatePowerPlant = async (action: 'start' | 'stop') => {
+    return await fetch(`${CONTROL_API}/powerplant/${props.item.name}/${action}`, {
+      method: 'PUT',
+    })
+  }
+
   const animateDeletion = async () => {
     await animate(scope.current, { background: 'rgba(246,54,54,0.26)', overflow: 'none' }, { duration: 0.1 })
     await animate(scope.current, { x: -25, y: 0, opacity: 0.75 }, { duration: 0.5 })
     await animate(scope.current, { opacity: 1, x: 0, background: '' }, { duration: 0.25 })
 
-    try {
-      const response = await fetch(`http://188.245.157.176:8080/powerplant/${props.item}/stop`, {
-        method: 'PUT',
-      })
+    await updatePowerPlant('stop')
+      .then((res) => {
+        console.log(res)
+        if (!res.ok) {
+          return toast('Failed to stop the Power Plant!', { type: 'error' })
+        }
 
-      if (response.ok) {
-        alert('Powerplant erfolgreich gestoppt')
-      } else {
-        const errorData = await response.json()
-        alert(errorData.message || 'Stoppen fehlgeschlagen')
-      }
-    } catch (error) {
-      console.error('Stoppen fehlgeschlagen:', error)
-      alert('Stoppen fehlgeschlagen')
-    }
+        toast('Power Plant stopped successfully', { type: 'success' })
+      })
+      .catch((error) => {
+        toast(`Failed to stop power plant, ${error}`, { type: 'error' })
+      })
   }
 
   const animateStart = async () => {
@@ -32,21 +39,17 @@ export default function ManagePowerPlantActionButtons<T>(props: TableActionButto
     await animate(scope.current, { x: 25, y: 0, opacity: 0.75 }, { duration: 0.5 })
     await animate(scope.current, { opacity: 1, x: 0, background: '' }, { duration: 0.25 })
 
-    try {
-      const response = await fetch(`http://188.245.157.176:8080/powerplant/${props.item}/start`, {
-        method: 'PUT',
-      })
+    await updatePowerPlant('start')
+      .then((res) => {
+        if (!res.ok) {
+          return toast('Failed to start the Power Plant!', { type: 'error' })
+        }
 
-      if (response.ok) {
-        alert('Powerplant erfolgreich gestartet')
-      } else {
-        const errorData = await response.json()
-        alert(errorData.message || 'Starten fehlgeschlagen')
-      }
-    } catch (error) {
-      console.error('Starten fehlgeschlagen:', error)
-      alert('Starten fehlgeschlagen')
-    }
+        toast('Power Plant started successfully', { type: 'success' })
+      })
+      .catch((error) => {
+        toast(`Failed to start power plant, ${error}`, { type: 'error' })
+      })
   }
 
   return (
