@@ -27,7 +27,7 @@ export default function RootLayout({
       <body className={`bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-gray-200`}>
         <SideBar />
         <AuthProvider>
-          <EnvironmentVariablesProvider DATA_API={process.env.DATA_API} CONTROL_API={process.env.CONTROL_API}>
+          <EnvironmentVariablesProvider DATA_API={process.env.DATA_API!} CONTROL_API={process.env.CONTROL_API!}>
             <div className={twMerge('p-4 @container', MainContentShiftBreakpoints)}>{children}</div>
           </EnvironmentVariablesProvider>
         </AuthProvider>
