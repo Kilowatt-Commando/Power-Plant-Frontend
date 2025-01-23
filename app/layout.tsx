@@ -28,7 +28,7 @@ export default function RootLayout({
         <AuthProvider>
           <div className={twMerge('p-4 @container', MainContentShiftBreakpoints)}>{children}</div>
         </AuthProvider>
-        <ToastContainer position='top-right' autoClose={3000} stacked />
+        <ToastContainer position='top-right' autoClose={3000} stacked pauseOnFocusLoss={false} />
       </body>
     </html>
   )
