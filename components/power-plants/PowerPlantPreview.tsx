@@ -20,7 +20,7 @@ export interface PowerPlantPreviewProps extends PowerPlant {
 export default function PowerPlantPreview({ id, name, status, rpm, outputVoltage, waterThroughput, nextWeather, timestamp, previewHref }: PowerPlantPreviewProps) {
   return (
     <Link
-      href={previewHref ?? `/power-plants/${id}`}
+      href={previewHref ?? `/power-plants/${name}`}
       role='listitem'
       className='p-4 dark:bg-neutral-700/50 bg-neutral-200 shadow-neutral-400 dark:shadow-neutral-900 shadow-md rounded-md flex flex-col gap-8 hover:bg-neutral-400/40 dark:hover:bg-neutral-700 hover:cursor-pointer'>
       <div className='flex justify-between items-center '>

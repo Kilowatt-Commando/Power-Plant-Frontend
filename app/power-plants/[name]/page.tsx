@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   title: 'Power Plant Details',
   description: 'Details of a specific power plant',
 }
-export default async function PowerPlantDetailPage({ searchParams: { powerplant_id } }: { searchParams: { powerplant_id: string | undefined } }) {
-  const powerPlant = await fetch(`${process.env.DATA_API}/powerplants/${powerplant_id}`, { cache: 'no-cache' }).then((res) => res.json() as Promise<PowerPlant | undefined>)
+export default async function PowerPlantDetailPage({ params: { name } }: { params: { name: string | undefined } }) {
+  const powerPlant = await fetch(`${process.env.DATA_API}/powerplants/${name}`, { cache: 'no-cache' }).then((res) => res.json() as Promise<PowerPlant | undefined>)
   if (!powerPlant) return notFound()
 
   return (
