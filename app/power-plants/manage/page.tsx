@@ -24,7 +24,7 @@ export default async function ManagePowerPlantsPage() {
           rpm: 'hidden @[510px]:table-cell',
           outputVoltage: 'hidden @[770px]:table-cell',
         }}
-        actionButtons={(plant) => <ManagePowerPlantActionButtons item={plant.item.name} />}
+        actionButtons={ManagePowerPlantActionButtons}
       />
     </div>
   )
