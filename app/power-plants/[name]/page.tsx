@@ -15,7 +15,7 @@ export default async function PowerPlantDetailPage({ params: { name } }: { param
   if (!powerPlant) return notFound()
 
   return (
-    <PowerPlantDetailProvider powerPlant={powerPlant} base_endpoint={`${process.env.DATA_API}/powerplant`}>
+    <PowerPlantDetailProvider powerPlant={powerPlant} base_endpoint={`${process.env.CONTROL_API}/powerplant`}>
       <div className='flex justify-center items-center p-6'>
         <div className='border border-gray-300 dark:border-neutral-500 rounded-lg p-6 bg-white dark:bg-neutral-700 dark:shadow-neutral-800 max-w-[600px] w-full shadow-md'>
           <h1 className='text-2xl font-bold mb-6 text-center'>{powerPlant.name}</h1>
