@@ -4,13 +4,15 @@ import { TableActionButtonProps } from '@/components/Shared/Table/Table'
 import { useTableRowAnimationContext } from '@/components/Shared/Table/TableRowAnimationContextProvider'
 import { useEnvironmentVariables } from '@/components/power-plants/manage/EnvironmentVariablesProvider'
 import { toast } from 'react-toastify'
+import { PowerPlant } from '@/schemas/PowerPlant'
 
 export default function ManagePowerPlantActionButtons<T>(props: TableActionButtonProps<T>) {
   const { scope, animate } = useTableRowAnimationContext()
   const { CONTROL_API } = useEnvironmentVariables()
+  const { name } = props.item as PowerPlant
 
   const updatePowerPlant = async (action: 'start' | 'stop') => {
-    return await fetch(`${CONTROL_API}/powerplant/${props.item.name}/${action}`, {
+    return await fetch(`${CONTROL_API}/powerplant/${name}/${action}`, {
       method: 'PUT',
     })
   }
