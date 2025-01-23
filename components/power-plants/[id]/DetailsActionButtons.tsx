@@ -2,42 +2,44 @@
 
 import { usePowerPlantDetailContext } from '@/components/power-plants/[id]/PowerPlantDetailProvider'
 import React from 'react'
+import { toast } from 'react-toastify'
 
 export default function DetailsActionButtons() {
   const { manageWaterflow, base_endpoint, powerPlant, toggleManageWaterflow } = usePowerPlantDetailContext()
+  console.log(powerPlant)
+  const updatePowerPlant = async (action: 'start' | 'stop') => {
+    return await fetch(`${base_endpoint}/${powerPlant.name}/${action}`, {
+      method: 'PUT',
+    })
+  }
 
   const handleStart = async (): Promise<void> => {
-    try {
-      const response = await fetch(`${base_endpoint}/${powerPlant.name}/start`, {
-        method: 'PUT',
+    await updatePowerPlant('start')
+      .then((res) => {
+        if (!res.ok) {
+          return toast('Failed to start the Power Plant!', { type: 'error' })
+        }
+
+        toast('Power Plant started successfully', { type: 'success' })
       })
-      if (response.ok) {
-        alert(`${powerPlant.name} erfolgreich gestartet`)
-      } else {
-        const errorData = await response.json()
-        alert(errorData.message || 'Starten fehlgeschlagen')
-      }
-    } catch (error) {
-      console.error('Error Starten fehlgeschlagen:', error)
-      alert('Starten fehlgeschlagen')
-    }
+      .catch((error) => {
+        toast(`Failed to start power plant, ${error}`, { type: 'error' })
+      })
   }
 
   const handleStop = async (): Promise<void> => {
-    try {
-      const response = await fetch(`${base_endpoint}/${powerPlant.name}/stop`, {
-        method: 'PUT',
+    await updatePowerPlant('stop')
+      .then((res) => {
+        console.log(res)
+        if (!res.ok) {
+          return toast('Failed to stop the Power Plant!', { type: 'error' })
+        }
+
+        toast('Power Plant stopped successfully', { type: 'success' })
       })
-      if (response.ok) {
-        alert(`${powerPlant.name} erfolgreich gestoppt`)
-      } else {
-        const errorData = await response.json()
-        alert(errorData.message || 'Stoppen fehlgeschlagen')
-      }
-    } catch (error) {
-      console.error('Error Stoppen fehlgeschlagen:', error)
-      alert('Stoppen fehlgeschlagen')
-    }
+      .catch((error) => {
+        toast(`Failed to stop power plant, ${error}`, { type: 'error' })
+      })
   }
 
   return (
