@@ -17,10 +17,26 @@ export interface PowerPlantPreviewProps extends PowerPlant {
 /**
  * This component renders a preview of a power plant that shows its name and id and three of the most important metrics. When clicked it navigates to the power plant's detail page.
  */
-export default function PowerPlantPreview({ id, name, rpm, waterThroughput, outputVoltage, previewHref }: PowerPlantPreviewProps) {
+export default function PowerPlantPreview({ id, name, status, rpm, outputVoltage, waterThroughput, nextWeather, timestamp, previewHref }: PowerPlantPreviewProps) {
   return (
     <Link
-      href={previewHref ?? `/power-plants/${id}`}
+      href={{
+        pathname: previewHref ?? `/power-plants/${id}`,
+        query: {
+          powerplant: encodeURIComponent(
+            JSON.stringify({
+              id,
+              name,
+              status,
+              rpm,
+              outputVoltage,
+              waterThroughput,
+              nextWeather,
+              timestamp,
+            }),
+          ),
+        },
+      }}
       role='listitem'
       className='p-4 dark:bg-neutral-700/50 bg-neutral-200 shadow-neutral-400 dark:shadow-neutral-900 shadow-md rounded-md flex flex-col gap-8 hover:bg-neutral-400/40 dark:hover:bg-neutral-700 hover:cursor-pointer'>
       <div className='flex justify-between items-center '>
