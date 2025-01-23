@@ -6,6 +6,8 @@ import { MainContentShiftBreakpoints } from '@/config/SideBarConfig'
 import React from 'react'
 import AuthProvider from '@/components/root/AuthProvider'
 import getColorMode from '@/lib/getColorMode'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
 
 export const metadata: Metadata = {
   title: 'Power Plant Frontend',
@@ -26,6 +28,7 @@ export default function RootLayout({
         <AuthProvider>
           <div className={twMerge('p-4 @container', MainContentShiftBreakpoints)}>{children}</div>
         </AuthProvider>
+        <ToastContainer position='top-right' autoClose={3000} stacked />
       </body>
     </html>
   )
