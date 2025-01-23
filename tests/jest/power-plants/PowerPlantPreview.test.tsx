@@ -8,7 +8,22 @@ const dummyPowerPlants = createDummyPowerPlants(5)
 describe('PowerPlantPreview - ', () => {
   it('has correct redirect link', async () => {
     const href = '/test'
-    const Component = await PowerPlantPreview({ ...dummyPowerPlants.at(0), previewHref: href })
+    const plant = dummyPowerPlants.at(0)
+    const encodedPowerPlant = encodeURIComponent(
+      encodeURIComponent(
+        JSON.stringify({
+          id: plant.id,
+          name: plant.name,
+          status: plant.status,
+          rpm: plant.rpm,
+          outputVoltage: plant.outputVoltage,
+          waterThroughput: plant.waterThroughput,
+          nextWeather: plant.nextWeather,
+          timestamp: plant.timestamp,
+        }),
+      ),
+    )
+    const Component = await PowerPlantPreview({ ...plant, previewHref: href })
     const { container } = render(Component)
 
     const links = container.getElementsByTagName('a')
@@ -17,7 +32,7 @@ describe('PowerPlantPreview - ', () => {
     const link = links[0]
 
     expect(link).toBeInTheDocument()
-    expect(link).toHaveAttribute('href', href)
+    expect(link).toHaveAttribute('href', `${href}?powerplant=${encodedPowerPlant}`)
   })
 
   it('displays correct power plant name and id', async () => {
