@@ -8,12 +8,20 @@ export default function DetailsActionButtons() {
   const { manageWaterflow, base_endpoint, powerPlant, toggleManageWaterflow } = usePowerPlantDetailContext()
 
   const updatePowerPlant = async (action: 'start' | 'stop') => {
+    const token = localStorage.getItem('token')
     return await fetch(`${base_endpoint}/${powerPlant.name}/${action}`, {
       method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
   }
 
   const handleStart = async (): Promise<void> => {
+    if (localStorage.getItem('isAdmin') !== '[ROLE_ADMIN]') {
+      toast('You have no permission for this action')
+      return
+    }
     await updatePowerPlant('start')
       .then((res) => {
         if (!res.ok) {
@@ -28,6 +36,10 @@ export default function DetailsActionButtons() {
   }
 
   const handleStop = async (): Promise<void> => {
+    if (localStorage.getItem('isAdmin') !== '[ROLE_ADMIN]') {
+      toast('You have no permission for this action')
+      return
+    }
     await updatePowerPlant('stop')
       .then((res) => {
         console.log(res)

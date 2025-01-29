@@ -9,10 +9,11 @@ export default function WatergateManagementView() {
 
   const updateWaterGateConfig = async () => {
     try {
+      const token = localStorage.getItem('token')
       const response = await fetch(`${base_endpoint}/${powerPlant.name}/gateClosure`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ closure: String(waterGateConfig) }),
       })

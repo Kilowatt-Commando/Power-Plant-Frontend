@@ -12,8 +12,12 @@ export default function ManagePowerPlantActionButtons<T>(props: TableActionButto
   const { name } = props.item as PowerPlant
 
   const updatePowerPlant = async (action: 'start' | 'stop') => {
+    const token = localStorage.getItem('token')
     return await fetch(`${CONTROL_API}/powerplant/${name}/${action}`, {
       method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
   }
 
@@ -21,6 +25,11 @@ export default function ManagePowerPlantActionButtons<T>(props: TableActionButto
     await animate(scope.current, { background: 'rgba(246,54,54,0.26)', overflow: 'none' }, { duration: 0.1 })
     await animate(scope.current, { x: -25, y: 0, opacity: 0.75 }, { duration: 0.5 })
     await animate(scope.current, { opacity: 1, x: 0, background: '' }, { duration: 0.25 })
+
+    if (localStorage.getItem('isAdmin') !== '[ROLE_ADMIN]') {
+      toast('You have no permission for this action')
+      return
+    }
 
     await updatePowerPlant('stop')
       .then((res) => {
@@ -40,6 +49,11 @@ export default function ManagePowerPlantActionButtons<T>(props: TableActionButto
     await animate(scope.current, { background: 'rgba(131,246,54,0.26)', overflow: 'none' }, { duration: 0.1 })
     await animate(scope.current, { x: 25, y: 0, opacity: 0.75 }, { duration: 0.5 })
     await animate(scope.current, { opacity: 1, x: 0, background: '' }, { duration: 0.25 })
+
+    if (localStorage.getItem('isAdmin') !== '[ROLE_ADMIN]') {
+      toast('You have no permission for this action')
+      return
+    }
 
     await updatePowerPlant('start')
       .then((res) => {
