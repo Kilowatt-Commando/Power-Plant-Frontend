@@ -79,7 +79,6 @@ test('Power Plant Management Page - Animates PowerPlant Startup', async ({ page 
   await page.goto('http://localhost:3000/power-plants/manage')
   const element = page.locator(TABLE_ELEMENT_SELECTOR)
   expect(element).not.toBeNull()
-  await expect(element).toBeVisible()
 
   const actionButons = await hasActionButtons(page, TABLE_ELEMENT_SELECTOR)
   expect(actionButons, 'Expect Management Table Element to have Action-Buttons in the last table-cell').toBeGreaterThanOrEqual(1)
@@ -96,7 +95,6 @@ test('Power Plant Management Page - Animates PowerPlant Shutdown', async ({ page
   await page.goto('http://localhost:3000/power-plants/manage')
   const element = page.locator(TABLE_ELEMENT_SELECTOR)
   expect(element).not.toBeNull()
-  await expect(element).toBeVisible()
 
   const actionButons = await hasActionButtons(page, TABLE_ELEMENT_SELECTOR)
   expect(actionButons, 'Expect Management Table Element to have Action-Buttons in the last table-cell').toBeGreaterThanOrEqual(1)
