@@ -3,7 +3,6 @@
 import { Button, Form, Input } from 'antd'
 import { toast } from 'react-toastify'
 import { useEnvironmentVariables } from '@/components/power-plants/manage/EnvironmentVariablesProvider'
-import { hashPassword } from './LoginForm'
 
 interface RegisterFormProps {
   onRegisterSuccess: () => void
@@ -15,10 +14,9 @@ export default function RegisterForm({ onRegisterSuccess }: RegisterFormProps) {
 
   const handleSubmit = async (values: { name: string; email: string; password: string }) => {
     try {
-      const hashedPassword = await hashPassword(values.password)
       const response = await fetch(`${DATA_API}/users/register`, {
         method: 'POST',
-        body: JSON.stringify({ username: values.name, email: values.email, password: hashedPassword }),
+        body: JSON.stringify({ username: values.name, email: values.email, password: values.password }),
         headers: { 'Content-Type': 'application/json' },
       })
       if (response.ok) {
