@@ -13,7 +13,8 @@ export default function WatergateManagementView() {
       const response = await fetch(`${base_endpoint}/${powerPlant.name}/gateClosure`, {
         method: 'PUT',
         headers: {
-          Authorization: `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ closure: String(waterGateConfig) }),
       })

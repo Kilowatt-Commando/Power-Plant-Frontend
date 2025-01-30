@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { Button, Form, Input } from 'antd'
 import { toast } from 'react-toastify'
 import { useEnvironmentVariables } from '@/components/power-plants/manage/EnvironmentVariablesProvider'
-import { hashPassword } from './LoginForm'
 
 interface User {
   id: string
@@ -51,11 +50,7 @@ export default function EditProfileForm() {
   const handleSubmit = async (values: { newValue: string }) => {
     if (!user || !editType) return
 
-    let newValue = values.newValue
-    if (editType === 'password') {
-      newValue = await hashPassword(values.newValue)
-    }
-    const updatedUser = { ...user, [editType]: newValue }
+    const updatedUser = { ...user, [editType]: values.newValue }
     try {
       const token = localStorage.getItem('token')
       const response = await fetch(`${DATA_API}/users/${updatedUser.id}`, {
