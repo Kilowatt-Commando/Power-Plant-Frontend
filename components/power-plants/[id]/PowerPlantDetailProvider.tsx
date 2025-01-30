@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState } from 'react'
 import { PowerPlant } from '@/schemas/PowerPlant'
+import { toast } from 'react-toastify'
 
 interface PowerPlantDetailContextProps {
   manageWaterflow: boolean
@@ -26,6 +27,10 @@ export default function PowerPlantDetailProvider({ children, powerPlant, base_en
   const [waterGateConfig, setWaterGateConfig] = useState<'open' | 'closed' | 'half' | 'quarter' | 'threeQuarter'>('open')
 
   const toggleManageWaterflow = () => {
+    if (localStorage.getItem('isAdmin') !== '[ROLE_ADMIN]') {
+      toast('You have no permission for this action')
+      return
+    }
     setManageWaterflow((prev) => !prev)
   }
 

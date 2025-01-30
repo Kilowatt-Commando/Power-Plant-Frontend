@@ -5,13 +5,20 @@ import DetailsActionButtons from '@/components/power-plants/[id]/DetailsActionBu
 import WatergateManagementView from '@/components/power-plants/[id]/WatergateManagementView'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
+import { cookies } from 'next/headers'
 
 export const metadata: Metadata = {
   title: 'Power Plant Details',
   description: 'Details of a specific power plant',
 }
 export default async function PowerPlantDetailPage({ params: { name } }: { params: { name: string | undefined } }) {
-  const powerPlant = await fetch(`${process.env.DATA_API}/powerplants/latest/${name}`, { cache: 'no-cache' })
+  const token = cookies().get('token')?.value
+  const powerPlant = await fetch(`${process.env.DATA_API}/powerplants/latest/${name}`, {
+    cache: 'no-cache',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
     .then((res) => res.json() as Promise<PowerPlant[]>)
     .then((plants) => plants?.at(0))
   if (!powerPlant) return notFound()

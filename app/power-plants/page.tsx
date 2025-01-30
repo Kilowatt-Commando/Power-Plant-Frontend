@@ -2,6 +2,7 @@ import React from 'react'
 import PowerPlantPreview from '@/components/power-plants/PowerPlantPreview'
 import { PowerPlant } from '@/schemas/PowerPlant'
 import { Metadata } from 'next'
+import { cookies } from 'next/headers'
 
 export const metadata: Metadata = {
   title: 'Available Power Plants',
@@ -9,7 +10,17 @@ export const metadata: Metadata = {
 }
 
 export default async function PowerPlantsPage() {
-  const plants = await fetch(`${process.env.DATA_API}/powerplants/latest`, { cache: 'no-cache' }).then((res) => res.json() as Promise<PowerPlant[]>)
+  const token = cookies().get('token')?.value
+  let plants: PowerPlant[] = []
+  if (!token) {
+    return <h1>Please login in order to fetch the Power Plants</h1>
+  }
+  plants = await fetch(`${process.env.DATA_API}/powerplants/latest`, {
+    cache: 'no-cache',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => res.json() as Promise<PowerPlant[]>)
 
   return (
     <div className='@container'>
