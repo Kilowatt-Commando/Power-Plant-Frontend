@@ -4,19 +4,9 @@ import { Button, Form, Input } from 'antd'
 import { useEnvironmentVariables } from '@/components/power-plants/manage/EnvironmentVariablesProvider'
 import { toast } from 'react-toastify'
 import { setCookie } from 'cookies-next'
-import crypto from 'crypto'
 
 interface LoginFormProps {
   onLoginSuccess: () => void
-}
-
-export const hashPassword = async (password: string): Promise<string> => {
-  const encoder = new TextEncoder()
-  const data = encoder.encode(password)
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
-  return Array.from(new Uint8Array(hashBuffer))
-    .map((byte) => byte.toString(16).padStart(2, '0'))
-    .join('')
 }
 
 export default function LoginForm({ onLoginSuccess }: LoginFormProps) {
@@ -25,7 +15,6 @@ export default function LoginForm({ onLoginSuccess }: LoginFormProps) {
 
   const handleSubmit = async (values: { username: string; password: string }) => {
     try {
-      //   const hashedPassword = await hashPassword(values.password)
       const response = await fetch(`${DATA_API}/auth/login?username=${values.username}&password=${values.password}`, {
         method: 'POST',
       })
